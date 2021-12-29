@@ -1,0 +1,2 @@
+MagicMintv2 Frontend
+
