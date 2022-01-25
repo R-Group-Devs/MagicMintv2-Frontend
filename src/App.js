@@ -20,6 +20,7 @@ function App() {
 
 <BrowserRouter>
   <Routes>
+      <Route path="/" element={<Auth/>}/>
       <Route path="/auth" exact element={<Auth/>}/>
       <Route path="/campaign" exact element={<Campaign/>}/> \
       <Route path="/profile" exact element={<Profile/>}/> \
