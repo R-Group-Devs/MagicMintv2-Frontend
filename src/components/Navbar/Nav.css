@@ -1,0 +1,71 @@
+.navigation{
+    padding-top: 1%;
+    font-family: Grtsk-Zetta;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 17px;
+    letter-spacing: 0.02em;
+    color: #313439;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.mid-content{
+    padding-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+.right-content{
+    text-align: right;
+   text-transform: uppercase;
+
+}
+.nav-item{
+    padding: 3% 3% 3% 3%;
+    font-size: 17px;
+}
+.connect-wallet{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    width: 140px;
+    height: 37px;
+    left: 132px;
+    text-transform: uppercase;
+    top: 0px;
+    border: none;
+    background: #F0F1F9;
+    border-radius: 6px;
+    font-family: Grtsk-Zetta;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+}
+.connect-wallet:hover{
+    background: #BAC2FF;
+}
+.profile{
+    width: 60px;
+    height: 60px;
+    border-radius: 1000px;
+}
+.text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.button-close{
+    float: right;
+    background-color: white;
+    border: none;
+}
+.left-content{
+    font-family: Grtsk Zetta;
+    font-style: normal;
+    font-weight: normal;
+    padding-top: 10px;
+    font-size: 28px;
+}
