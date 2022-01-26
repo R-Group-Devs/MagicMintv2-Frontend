@@ -1,18 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import './fonts.css'
 import Campaign from './components/Campaign/Campaign';
 import Auth from './components/Auth/Auth';
 import { BrowserRouter, Switch, Link, Routes, Route  } from "react-router-dom";
 import Profile from './components/Profile/Profile';
 import Header from './components/Navbar/Header';
+import Welcome from './components/Welcome/Welcome';
 
 
 function App() {
-
-
-
-
-
 
   return (
     <div >
@@ -24,6 +21,7 @@ function App() {
       <Route path="/auth" exact element={<Auth/>}/>
       <Route path="/campaign" exact element={<Campaign/>}/> \
       <Route path="/profile" exact element={<Profile/>}/> \
+      <Route path="/welcome" exact element={<Welcome/>}/> \
 
   </Routes>
 </BrowserRouter>

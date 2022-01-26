@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Auth.css';
+import '../../fonts.css';
+import twitterLogo from '../../assets/images/Twitter.png'
 import axios from 'axios';
 import queryString from 'query-string';
 import 'react-responsive-modal/styles.css';
@@ -16,46 +18,12 @@ function Auth(){
     const [status, setStatus] = useState();
     const [url, setUrl] = useState();
     
-    const centeredBox = {
-        width:"400px",
-        height:"300px",
-        textAlign:"center",
-        margin: "auto",
-        borderRadius: "10px",
-        boxShadow: "-9px 4px 56px -13px",
-        border: "1px solid #e5e7eb",
-        boxSizing: "border-box",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
-    }
 
-    const section = {
-        height: "100%"
-    }
-    const description = {
-        padding: "10%",
-
-    }
-    const loginButton = {
-        backgroundColor: "#7DA2A9",
-        borderColor: "white",
-        padding: "10px",
-        fontSize: "16px",
-        borderRadius: "10px"
-    }
-
-    const title = {
-        fontSize:"28px",
-        padding: "15px",
-        borderBottom:"1px solid #e5e7eb"
-    }
     function loginButtonMouseOver(e){
-        e.target.style.fontSize = "18px"
+        e.target.style.fontSize = "24px"
     }
     function loginButtonMouseLeave(e){
-        e.target.style.fontSize = "16px"
+        e.target.style.fontSize = "22px"
     }
 
     async function login () {
@@ -164,18 +132,18 @@ function Auth(){
 
     return(
 
-    <div style={section}>
-        <div style={centeredBox}>
-            <div style={title}>
-                Login with twitter
+    <div>
+        <div className="centeredBox">
+            <div className="title">
+                ✨ MagicMint ✨ 
             </div>
-            <div style={description}>
+            <div className="description">
                 Login with twitter and start doing magic.
                 Create your own campaign and giveaway NFTs or claim an NFT from a campaign you just created.
 
             </div>
-            <button style={loginButton} onClick={login} onMouseOver={loginButtonMouseOver} onMouseLeave={loginButtonMouseLeave}>
-                Authorize with Twitter
+            <button className="loginButton" onClick={login} onMouseOver={loginButtonMouseOver} onMouseLeave={loginButtonMouseLeave}>
+                <img className="image" src={twitterLogo}/>Authorize with Twitter
             </button>
         </div>
     </div>
