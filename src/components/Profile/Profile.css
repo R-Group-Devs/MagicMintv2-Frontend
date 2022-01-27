@@ -147,8 +147,9 @@
     align-items: center;
     color: #313439;
     border-radius: 110px;
-    padding: 30px;
+    padding: 23px 1px 23px 12px;
     margin-top: 1px;
+    margin-left: -13px!important;
 }
 
 .active-listings{
@@ -314,9 +315,14 @@
 .left-profile{
     background: #F0F1F9;
     margin: 0;
-    height: 1000px; 
+    height: 100%; 
     overflow: hidden;
     position: fixed;
+    margin-top:-4%;
+}
+.row{
+    --bs-gutter-x: 0rem!important;
+
 }
 
 .logo-profile{
