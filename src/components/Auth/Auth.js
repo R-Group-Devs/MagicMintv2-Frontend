@@ -139,7 +139,7 @@ function Auth(){
             </div>
             <div className="description">
                 Login with twitter and start doing magic.
-                Create your own campaign and giveaway NFTs or claim an NFT from a campaign you just created.
+                Create your own campaign and giveaway NFTs or claim an NFT from a campaign you just retweeted.
 
             </div>
             <button className="loginButton" onClick={login} onMouseOver={loginButtonMouseOver} onMouseLeave={loginButtonMouseLeave}>
