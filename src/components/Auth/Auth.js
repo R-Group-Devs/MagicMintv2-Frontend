@@ -11,6 +11,7 @@ const apiPath = "https://localhost:3000/api/twitter"
 
 function Auth(){
 
+  console.log(process.env.REACT_APP_AUTH_TWITTER)
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [name, setName] = useState();
