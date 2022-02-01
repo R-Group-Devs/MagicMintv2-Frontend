@@ -1,5 +1,5 @@
 import react from "react";
-import "./Campaign.css"
+import "./CreateCampaign.css"
 import Header from '../Navbar/Header';
 
 
@@ -10,6 +10,10 @@ function Campaign(){
         <div>
 
         <Header/>
+
+        <div>
+            createCampaign form
+        </div>
 
         </div>
     )
