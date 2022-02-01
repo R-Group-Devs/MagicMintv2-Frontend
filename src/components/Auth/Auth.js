@@ -25,29 +25,15 @@ function Auth(){
     function loginButtonMouseLeave(e){
         e.target.style.fontSize = "22px"
     }
+    const login = () =>  {
 
-    async function login () {
+      window.location.href = "http://localhost:3000/auth/twitter"
+    }
+     const callback = () => {
+      window.location.href = "http://localhost:3000/auth/twitter/callback"
 
-      console.log("clicked");
-      const response = await axios({
-        url: 'http://localhost:3000/api/twitter/oauth/request_token', 
-        method: 'POST'
-      });
-      
-      const { oauth_token } = response.data;
-        (async () => {
-          
-          try {
-            //OAuth Step 1
+     }
 
-            //Oauth Step 2
-            window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`;
-          } catch (error) {
-            console.error(error); 
-          }
-          
-        })();
-      }
     // const logout = () => {
     //    ( async() => {
     //         try {
@@ -91,44 +77,44 @@ function Auth(){
         })();
       }
       
-      useEffect(() => {
-        (async() => {
+      // useEffect(() => {
+      //   (async() => {
           
-            const {oauth_token, oauth_verifier} = queryString.parse(window.location.search);  
+      //       const {oauth_token, oauth_verifier} = queryString.parse(window.location.search);  
             
-            if (oauth_token && oauth_verifier) {
-             try {
-                //Oauth Step 3
-                await axios({
-                  url: `${apiPath}/twitter/oauth/access_token`,  
-                  method: 'POST',
-                  data: {oauth_token, oauth_verifier}
-                });
-             } catch (error) {
-              console.error(error); 
-             }
-            }
+      //       if (oauth_token && oauth_verifier) {
+      //        try {
+      //           //Oauth Step 3
+      //           await axios({
+      //             url: `${apiPath}/twitter/oauth/access_token`,  
+      //             method: 'POST',
+      //             data: {oauth_token, oauth_verifier}
+      //           });
+      //        } catch (error) {
+      //         console.error(error); 
+      //        }
+      //       }
             
-            try {
+      //       try {
                 
-              //Authenticated Resource Access
-              const {data: {name, profile_image_url_https, status, entities}} = await axios({
-                url: `${apiPath}/twitter/users/profile_banner`,
-                method: 'GET'
-              });
+      //         //Authenticated Resource Access
+      //         const {data: {name, profile_image_url_https, status, entities}} = await axios({
+      //           url: `${apiPath}/twitter/users/profile_banner`,
+      //           method: 'GET'
+      //         });
               
-              setIsLoggedIn(true);
-              setName(name);
-              setImageUrl(profile_image_url_https);
-              setStatus(status.text);
-              setUrl(entities.url.urls[0].expanded_url);
-             } catch (error) {
-              console.error(error); 
-             }
+      //         setIsLoggedIn(true);
+      //         setName(name);
+      //         setImageUrl(profile_image_url_https);
+      //         setStatus(status.text);
+      //         setUrl(entities.url.urls[0].expanded_url);
+      //        } catch (error) {
+      //         console.error(error); 
+      //        }
             
           
-        })();
-      }, []);
+      //   })();
+      // }, []);
 
     return(
 
@@ -145,6 +131,7 @@ function Auth(){
             <button className="loginButton" onClick={login} onMouseOver={loginButtonMouseOver} onMouseLeave={loginButtonMouseLeave}>
                 <img className="image" src={twitterLogo}/>Authorize with Twitter
             </button>
+
         </div>
     </div>
     )

@@ -1,30 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
 import './fonts.css'
-import Campaign from './components/Campaign/Campaign';
+import CreateCampaign from './components/CreateCampaign/CreateCampaign';
 import Auth from './components/Auth/Auth';
 import { BrowserRouter, Switch, Link, Routes, Route  } from "react-router-dom";
 import Profile from './components/Profile/Profile';
 import Header from './components/Navbar/Header';
+import ClaimPage from './components/ClaimPage/ClaimPage';
 import Welcome from './components/Welcome/Welcome';
-
+import { myContext } from './components/Context';
+import { useContext } from 'react';
 
 function App() {
 
+
+  const userObject = useContext(myContext)
   return (
     <div >
-
-
-<BrowserRouter>
-  <Routes>
-      <Route path="/" element={<Auth/>}/>
-      <Route path="/auth" exact element={<Auth/>}/>
-      <Route path="/campaign" exact element={<Campaign/>}/> \
-      <Route path="/profile" exact element={<Profile/>}/> \
-      <Route path="/welcome" exact element={<Welcome/>}/> \
-
-  </Routes>
-</BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Auth/>}/>
+            <Route path="/auth" exact element={<Auth/>}/>
+            <Route path="/createcampaign" exact element={<CreateCampaign/>}/> 
+            <Route path="/profile" exact element={<Profile/>}/> 
+            <Route path="/welcome" exact element={<Welcome/>}/> 
+            <Route path="/claim" exact element={<ClaimPage/>}/> \
+        </Routes>
+      </BrowserRouter>
 
     </div>
   );
