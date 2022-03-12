@@ -18,6 +18,7 @@ export default function Context(props){
             if (res.data){
                 console.log(res)
                 setUserObject(res.data)
+                localStorage.setItem('profile', JSON.stringify(res.data))
             }
         })
     },[])

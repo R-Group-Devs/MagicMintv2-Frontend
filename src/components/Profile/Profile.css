@@ -17,17 +17,7 @@
 .profile-nav div{
     margin-bottom: 25px;
 }
-.back-to-markeplace{
-    float: left;
-    font-family: Grtsk Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #313439;
-}
+
 .back-to-marketplace{
     padding-bottom: 250px;
     float: left;
@@ -151,9 +141,33 @@
     margin-top: 1px;
     margin-left: -13px!important;
 }
-
+.button-logout{
+    border:none;
+    font-family: Grtsk-Zetta;
+    font-style: normal;
+    font-weight: normal;
+    background-color: inherit;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #808195;
+}
+.button-logout:hover{
+    border:none;
+    font-family: Grtsk-Zetta;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: blue;
+}
 .active-listings{
     margin-right: 3%;
+    border-bottom: 1px solid #F0F1F9;
+
 }
 .patronages-row{
     padding: 20px;
@@ -261,6 +275,15 @@
     text-transform: capitalize;
     color: #313439;
     margin-top: 5%;
+    margin-bottom: 5%;
+}
+.profile-section-image{
+    line-height: 100%;
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    margin-top: -2%!important;
+
 }
 .profile-logo-text{
     font-family: Whyte;
@@ -307,13 +330,12 @@
 
 .right-profile{
     height: 1500px;
-    padding-left: 30px;
-    margin-left: 25%;
+    margin-left: 28%;
     margin-top: 30px;
 }
 
 .left-profile{
-    background: #F0F1F9;
+    background: #DADED4;
     margin: 0;
     height: 100%; 
     overflow: hidden;
@@ -348,11 +370,19 @@
 }
 .profile-nav a{
     text-decoration: none;
-    color: #808195;
+    color: #3C403D;
+}
+.profile-nav a:hover {
+    text-decoration: none;
+    color: #39603D;
 }
 .manage-funds-buttons{
     padding-right: 7%;
     padding-left: 7%;
+
+}
+.my-subscriptions{
+    margin-top: 4%;
 
 }
 .my-subscription-text{
@@ -387,4 +417,7 @@
     height: 120px;
     border-radius: 30px;
     width: 100%;
+}
+.nav-link{
+    color: black!important;
 }

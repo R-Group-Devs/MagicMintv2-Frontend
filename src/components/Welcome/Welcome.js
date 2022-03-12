@@ -6,7 +6,8 @@ import { myContext } from '../Context';
 import { useContext } from 'react';
 
 export default function Welcome (){
-    const userObject = useContext(myContext)
+    let userObject = localStorage.getItem('profile')
+    userObject = userObject ? JSON.parse(userObject) : []
 
     // useEffect(() => {
 
@@ -14,31 +15,26 @@ export default function Welcome (){
     //     console.log("img" , userObject.photos[0].value)
     // },[])
 
-
-
 if (userObject){
     return(
 
-        <div>
+        <div className="">
             <Header image= {userObject.photos[0].value} username={userObject.username}/>
-        
-            <div className="row">
-            <div className="col-md-4 col-lg-4 col-sm-4">
-            </div>
-            <div className="col-md-4 col-lg-4 col-sm-4 ">
-                <div className="welcomebuttons">
-                    <div className="welcome-title">Welcome {userObject.username} </div>
-                    <div className="welcome-desc"></div>
-                    <button className="campaign-button"><Link className="text-link" to="/createcampaign"> Create a campaign</Link></button><br></br>
-                    <button className="claim-button" disabled> <Link className="text-link" to="/claim"> Claim your nft</Link>Claim </button>
-        
-        
+
+            <div className="row welcome-wrapper">
+                <div className="col-md-4 col-lg-4 col-sm-12">
                 </div>
+                <div className="col-md-4 col-lg-4 col-sm-12 ">
+                    <div className="welcomebuttons">
+                        <div className="welcome-title">Greetings, {userObject.username} 👋  </div>
+                        <div className="welcome-desc"></div>
+                        <button className="campaign-button"><Link className="text-link" to="/createcampaign"> Create a campaign</Link></button><br></br>
+                        <button className="claim-button" disabled> <Link className="text-link" to="/claim"> Claim your nft</Link> </button>
+                    </div>
+                </div>
+                <div className="col-md-4 col-lg-4 col-sm-12 ">
                 </div>
             </div>
-            <div className="col-md-4 col-lg-4 col-sm-4 ">
-            </div>
-        
         </div>
         )
 } else {
