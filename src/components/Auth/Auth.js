@@ -43,7 +43,7 @@ function Auth(){
     <div>
         <div className="centeredBox">
             <div className="title">
-                ✨ MagicMint ✨ 
+                MagicMint 
             </div>
             <div className="description">
                 Login with twitter and start doing magic.
