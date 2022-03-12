@@ -13,24 +13,25 @@
 .description  {
     padding:10%;
     font-size:20px;
-    font-family: Grtsk Zetta;
+    font-family: Whyte;
 
 
 }
 .loginButton {
     border-color: white;
     padding: 10px;
-    font-family: Grtsk Zetta;
+    font-family: Grtsk  ;
     width:60%;
     margin-bottom: 20px;
     border:none;
-    font-size: 22px;
+    font-size: 20px;
     border-radius: 10px;
 }
 
 .title{
     font-family: Grtsk Zetta;
-    font-size: 30px;
+    font-size: 24px;
+    text-transform: uppercase;
     padding: 15px;
     border-bottom:1px solid #e5e7eb;
 }

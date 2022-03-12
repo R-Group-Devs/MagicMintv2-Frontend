@@ -21,11 +21,11 @@ function Auth(){
     
 
     function loginButtonMouseOver(e){
-        e.target.style.fontSize = "24px"
+        e.target.style.fontSize = "22px"
         console.log(process.env)
     }
     function loginButtonMouseLeave(e){
-        e.target.style.fontSize = "22px"
+        e.target.style.fontSize = "20px"
     }
     const login = () =>  {
       window.location.href = process.env.REACT_APP_AUTH_TWITTER
