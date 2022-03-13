@@ -10,10 +10,9 @@ export default function Context(props){
 
     const [userObject, setUserObject] = useState();
 
-    console.log(process.env.REACT_APP_BACKEND_URL)
 
     useEffect (() =>{ 
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/getuser`,{ withCredentials: true}).then(res => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/getuser`).then(res => {
             console.log(res)
             if (res.data){
                 console.log(res)

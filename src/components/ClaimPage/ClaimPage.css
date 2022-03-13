@@ -13,18 +13,20 @@
     margin: 5%;
     color: BLACK;
     background: white;
-
+    font-size: 16px;
     border-radius: 10px;
 }
 .check-claims-button:hover{
     font-family: Whyte;
+    width: 10px;
     width: 150px;
+
     border: none; 
     padding: 10px;
     text-align: center;
     margin: 0 auto;
-    color: white;
-    background: #39603D;
+    color: black;
+    background:#F7F7FC;
     margin: 5%;
 
     border-radius: 10px;
