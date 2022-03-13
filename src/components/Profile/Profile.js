@@ -9,18 +9,16 @@ import axios from 'axios';
 export default function Profile (){
 
     let userObject = localStorage.getItem('profile')
-    userObject = userObject ? JSON.parse(userObject) : []
 
     const [allCampaigns, setAllCampaigns] = useState(null)
     const [allCampaignsManage, setAllCampaignsManage] = useState(null)
     const [claimed, setClaimed] = useState()
 
-
-
     useEffect( async ()=>{
 
         //get all campaigns the user has
         const claimedNFTS = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/claim/getClaimedNFTs/${userObject.username}` )
+        
         console.log("claimed",claimedNFTS.data)
 
         const claimsData = claimedNFTS.data.map((claim)=>(
@@ -75,13 +73,13 @@ export default function Profile (){
         setAllCampaignsManage(campaignManage)
         console.log(allCampaignsManage)
         
-        //get all NFTS the user has yet to claim
-        // get all nfts that are claimed
+
 
     },[])
 
-
-    return(
+    if (userObject){
+        userObject = userObject ? JSON.parse(userObject) : []
+        return(
             <div className='row'>
 
                 <div className="col-md-3 col-lg-3 left-profile">
@@ -111,22 +109,7 @@ export default function Profile (){
                             <div className="profile-section-title">Claimable NFTs</div>
                             <div className="profile-section-desc">Get your reward! - <a href="/claim">Claim</a></div>
                         </div>
-                        {/* <div className="row" >
-                            <div className="col-md-3 col-lg-3">
-                                <ClaimableNFT/>
-                            </div>
-                            <div className="col-md-3 col-lg-3">
-                                <ClaimableNFT/>
-                            </div>
-                            <div className="col-md-3 col-lg-3">
-                                <ClaimableNFT/>
-                            </div>
-                            <div className="col-md-2 col-lg-2">
-                                <ClaimableNFT/>
-                            </div>
-                            <div className="see-more-subscribers">See More ..</div>
-        
-                        </div> */}
+
                         <div className="active-listings">
                             <div className="profile-section-title">Claimed NFTs</div>
                             <div className="profile-section-desc"></div>
@@ -168,5 +151,17 @@ export default function Profile (){
                 </div>
 
             </div>
-    )
+    )   
+
+    } else {
+        return(
+            <div className='not-logged-in'>
+                You are not logged in correctly.
+                Please head <a href='/auth'> here</a> to login with Twitter and access the app!
+            </div>
+        )
+    }
+
+
+
 }

@@ -6,16 +6,15 @@ import { myContext } from '../Context';
 import { useContext } from 'react';
 
 export default function Welcome (){
+
+    
     let userObject = localStorage.getItem('profile')
-    userObject = userObject ? JSON.parse(userObject) : []
 
-    // useEffect(() => {
-
-    //     console.log("welcome" , userObject)
-    //     console.log("img" , userObject.photos[0].value)
-    // },[])
+    
 
 if (userObject){
+        userObject = userObject ? JSON.parse(userObject) : []
+
     return(
 
         <div className="">
@@ -39,8 +38,9 @@ if (userObject){
         )
 } else {
     return(
-        <div>
-            you are not logged in
+        <div className='not-logged-in'>
+            You are not logged in correctly.
+            Please head <a href='/auth'> here</a> to login with Twitter and access the app!
         </div>
     )
 }

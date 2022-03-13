@@ -7,7 +7,6 @@ import ClaimableNFT from '../partials/ClaimableNFT/ClaimableNFT'
 function ClaimPage(){
     
     let userObject = localStorage.getItem('profile')
-    userObject = userObject ? JSON.parse(userObject) : []
 
     const [claimsNFT, setClaimsNFT] =useState(null);
 
@@ -53,43 +52,57 @@ function ClaimPage(){
     },[])
 
 
-    return(
-        <div>
+    if (userObject){
+        userObject = userObject ? JSON.parse(userObject) : []
+        return(
 
-        <Header image= {userObject.photos[0].value} username={userObject.username}/>
-
-        <div className="row button-row" >
-            <div className="col-md-4 col-lg-4 col-sm-12">
-
+        
+            <div>
+    
+            <Header image= {userObject.photos[0].value} username={userObject.username}/>
+    
+            <div className="row button-row" >
+                <div className="col-md-4 col-lg-4 col-sm-12">
+    
+                </div>
+                <div className="col-md-4 col-lg-4 col-sm-12 check-claims-div">
+                
+                <button onClick={checkClaims} className="check-claims-button">
+                    Check for new claims
+                    </button>
+                </div>
+                <div className="col-md-4 col-lg-4 col-sm-12">
+                
+                </div>
+    
             </div>
-            <div className="col-md-4 col-lg-4 col-sm-12 check-claims-div">
-            
-            <button onClick={checkClaims} className="check-claims-button">
-                Check for new claims
-                </button>
-            </div>
-            <div className="col-md-4 col-lg-4 col-sm-12">
-            
-            </div>
-
-        </div>
-        <div className="row">
-            <div className="container row claims-container">
-
-                {claimsNFT
-                    ?<div className="row">{claimsNFT}</div>
-                    :  <div className="no-claims-message">
-                            No NFTS
-                            <div>
-                                Check out active listings and get your claim
+            <div className="row">
+                <div className="container row claims-container">
+    
+                    {claimsNFT
+                        ?<div className="row">{claimsNFT}</div>
+                        :  <div className="no-claims-message">
+                                No NFTS
+                                <div>
+                                    Check out active listings and get your claim
+                                </div>
                             </div>
-                        </div>
-                }
+                    }
+                </div>
             </div>
-        </div>
+    
+            </div>
+        )
+    } else {
+        return(
+            <div className='not-logged-in'>
+                You are not logged in correctly.
+                Please head <a href='/auth'> here</a> to login with Twitter and access the app!
+            </div>
+        )
+    }
 
-        </div>
-    )
+   
 }
 
 
