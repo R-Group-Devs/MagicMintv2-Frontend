@@ -12,7 +12,7 @@ export default function Context(props){
 
 
     useEffect (() =>{ 
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/getuser`).then(res => {
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/getuser`, {withCredentials: true}).then(res => {
             console.log(res)
             if (res.data){
                 console.log(res)
