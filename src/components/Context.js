@@ -13,9 +13,9 @@ export default function Context(props){
 
     useEffect (() =>{ 
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/getuser`, {withCredentials: true}).then(res => {
-            console.log(res)
+            console.log("axios object",res)
             if (res.data){
-                console.log(res)
+                console.log("response data",res)
                 setUserObject(res.data)
                 localStorage.setItem('profile', JSON.stringify(res.data))
             }
