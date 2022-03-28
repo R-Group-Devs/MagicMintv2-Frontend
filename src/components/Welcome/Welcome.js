@@ -10,10 +10,16 @@ export default function Welcome (){
     
     let userObject = localStorage.getItem('profile')
 
-    
+    // useEffect(()=>{
+    //     if(!window.location.hash) {
+	// 	window.location = window.location + '#loaded';
+	// 	window.location.reload();
+	// }
+    // },[userObject])      
 
 if (userObject){
         userObject = userObject ? JSON.parse(userObject) : []
+
 
     return(
 

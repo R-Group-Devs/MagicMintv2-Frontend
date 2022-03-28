@@ -3,15 +3,42 @@ import axios from "axios";
 import "./ClaimPage.css"
 import Header from '../Navbar/Header';
 import ClaimableNFT from '../partials/ClaimableNFT/ClaimableNFT'
+import MMEngineABI from '../../shell/abis/MMEngine.json'
+import { Contract, ethers } from 'ethers'
 
-function ClaimPage(){
+
+
+ function ClaimPage(){
     
     let userObject = localStorage.getItem('profile')
+
+    const MMEngineAddress = '0xBEA58ad6d477Ac598E68D8E6aC23E19F43288F06'
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner();
+
+    console.log("Add", signer._address)
+
+
+    const MMEngine = new ethers.Contract(MMEngineAddress, MMEngineABI.abi, signer)
+    console.log("mmengine", MMEngine)
+
+
+    useEffect( async ()=>{  
+    const contractName = await MMEngine.name();
+
+    },[])
+
 
     const [claimsNFT, setClaimsNFT] =useState(null);
 
     const checkClaims = async function(){
         const allCampaignsTwitterPost = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/claim/getAllClaimsByUser/${userObject.username}` )
+        if(allCampaignsTwitterPost.data == 'none'){
+            console.log(allCampaignsTwitterPost)
+        }else{
+            window.location.reload()
+        }
     }
 
     console.log(window.ethereum)
@@ -28,7 +55,7 @@ function ClaimPage(){
 
         const allClaims = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/claim/getClaims/${userObject.username}` )
         setClaimsNFT(null)
-        console.log("claimsdata",allClaims.data)
+        console.log("claimsdata", allClaims.data)
 
         const claimable = allClaims.data.map((claim)=>(
 
@@ -43,7 +70,7 @@ function ClaimPage(){
                 //nft name
                 //nft desc
                 //nft number = campaign mint number */}
-                <ClaimableNFT ipfsUri={claim.ipfsUri}  name={claim.name} _id={claim._id} ></ClaimableNFT>
+                <ClaimableNFT ipfsUri={claim.ipfsUri}  name={claim.name} _id={claim._id} engine={MMEngine} signer={signer}></ClaimableNFT>
             </div>
 
         ))
