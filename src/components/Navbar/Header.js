@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import speshiepp from '../../assets/images/speshiepp.png'
 import { Navbar, Container, Nav, NavDropdown} from "react-bootstrap"
 import { ethers } from "ethers";
+import Logo from '../../assets/images/FullColor.png'
 import { BigNumber, BigNumberish } from 'ethers';
 
 import 'react-responsive-modal/styles.css';
@@ -83,7 +84,7 @@ function Header(props){
                 <a className="navbar-brand " href="#">
                   <Link className="nav-link" to="/welcome">
                       <span className="left-content branding">
-                        MagicMint
+                        <img src={Logo} className="logo-style"></img>
                       </span>
                   </Link>
                 </a>
@@ -105,9 +106,9 @@ function Header(props){
                       </Link>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="https://playgrounds.wtf/" target={"_blank"}>
-                      <span>Playgrounds</span>
-                    </a>
+                      <Link className="nav-link" to="/explore">
+                        <span>Explore</span>
+                      </Link>
                     </li>
 
                   </ul>

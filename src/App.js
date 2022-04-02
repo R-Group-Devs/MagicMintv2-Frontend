@@ -10,6 +10,7 @@ import ClaimPage from './components/ClaimPage/ClaimPage';
 import Welcome from './components/Welcome/Welcome';
 import { myContext } from './components/Context';
 import { useContext } from 'react';
+import Explore from './components/Explore/Explore';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/createcampaign" exact element={<CreateCampaign/>}/> 
             <Route path="/profile" exact element={<Profile/>}/> 
             <Route path="/welcome" exact element={<Welcome/>}/> 
+            <Route path="/explore" exact element={<Explore/>}/> 
             <Route path="/claim" exact element={<ClaimPage/>}/> \
         </Routes>
       </BrowserRouter>

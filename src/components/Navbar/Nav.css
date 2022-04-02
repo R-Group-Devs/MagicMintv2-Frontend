@@ -94,6 +94,10 @@
     padding-top: 7px;
 }
 
+.logo-style{
+    width: 160px;
+    /* height: 100px; */
+}
 .connect-button{
     border: 1px solid #39603D;
     font-family: Grtsk Zetta;
