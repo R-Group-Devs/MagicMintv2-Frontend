@@ -1,47 +1,42 @@
-
-.claims-container{
-    margin-top: 100px!important;
+.claims-container {
+  margin-top: 100px !important;
 }
 
-.check-claims-button{
-    font-family: Whyte;
-    width: 150px;
-    border: none; 
-    padding: 10px;
-    text-align: center;
-    margin: 0 auto;
-    margin: 5%;
-    color: BLACK;
-    background: white;
-    font-size: 16px;
-    border-radius: 10px;
+.check-claims-button {
+  font-family: Whyte;
+  width: 150px;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  margin: 0 auto;
+  margin: 5%;
+  color: BLACK;
+  background: white;
+  font-size: 16px;
+  border-radius: 10px;
 }
-.check-claims-button:hover{
-    font-family: Whyte;
-    width: 10px;
-    width: 150px;
-
-    border: none; 
-    padding: 10px;
-    text-align: center;
-    margin: 0 auto;
-    color: black;
-    background:#F7F7FC;
-    margin: 5%;
-
-    border-radius: 10px;
+.check-claims-button:hover {
+  font-family: Whyte;
+  width: 10px;
+  width: 150px;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  margin: 0 auto;
+  color: black;
+  margin: 5%;
+  border-radius: 10px;
 }
-.no-claims-message{
-    text-align: center;
-
+.no-claims-message {
+  text-align: center;
 }
-.check-claims-div{
-    text-align: center;
+.check-claims-div {
+  text-align: center;
 }
 
-.button-row{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #DADED4;
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfdeff;
 }

@@ -79,7 +79,7 @@ function Header(props){
   }
   
     return(
-        <div>
+        <div className="header">
             <nav className="navbar navbar-expand-md navbar-light"  style={{margin:"0% 2% 1% 2%"}}>
                 <a className="navbar-brand " href="#">
                   <Link className="nav-link" to="/welcome">

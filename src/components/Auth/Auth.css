@@ -3,24 +3,23 @@
     height: 400px;
     text-align: center;
     border-radius: 10px;
+    background-color: white;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border: 1px solid #e5e7eb;
     box-sizing: border-box;
     margin: 0 auto;
-    margin-top: 13%;
+    top: 25%;
+position: relative;
+    /* margin-top: 14%; */
 }
 
 .description  {
     padding:10%;
     font-size:20px;
-    font-family: Whyte;
-
-
 }
 .loginButton {
     border-color: white;
     padding: 10px;
-    font-family: Grtsk  ;
     width:60%;
     margin-bottom: 20px;
     border:none;
@@ -29,9 +28,9 @@
 }
 
 .title{
-    font-family: Grtsk Zetta;
+    /* font-family: Grtsk Zetta; */
     font-size: 24px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     padding: 15px;
     border-bottom:1px solid #e5e7eb;
 }
@@ -39,4 +38,17 @@
     width: 25px;
     height:25px;
     margin-right: 20px;
+}
+
+.auth-container{
+    background-image: url(../../assets/images/MagicMintCover.png);
+    background-repeat: no-repeat;
+}
+
+
+.wrapped{
+    background: linear-gradient(to right, #ECFD12, #C2BCFD);
+    opacity: 1;   
+    height: 100vh;
+
 }

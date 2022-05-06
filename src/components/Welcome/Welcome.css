@@ -1,83 +1,84 @@
-.welcomebuttons{
-    position: absolute;
-    width: 500px;
-    border-color: #f5f5f5;
-    background: #FFFFFF;
-    margin-top: 17%;
-    text-align: center;
+.welcomebuttons {
+  position: absolute;
+  width: 500px;
+  border-color: #f5f5f5;
+  margin-top: 20%;
+  text-align: center;
 }
-.text-link{
-    text-decoration: none!important;
+.text-link {
+  text-decoration: none !important;
 }
-.text-link:hover{
-    text-decoration:white;
+.text-link:hover {
+  text-decoration: white;
 }
 
-.campaign-button{
-    font-family: Whyte;
-    width: 430px;
-    height: 80px;
-    color: white;
-    margin-top:7%;
-    border: none;
-    background: #39603D;
-    border-radius: 20px;
+.campaign-button {
+  font-family: Whyte;
+  width: 430px;
+  height: 80px;
+  color: black;
+  margin-top: 7%;
+  border: none;
+  background: #ecfd12;
+  border-radius: 20px;
 }
-.campaign-button:hover{
-    font-family: Whyte;
-    width: 430px;
-    height: 80px;
-    color: white;
-    margin-top:7%;
-    border: none;
-    background: #DADED4;
-    border-radius: 20px;
+.campaign-button:hover {
+  font-family: Whyte;
+  width: 430px;
+  height: 80px;
+  margin-top: 7%;
+  border: none;
+  background: linear-gradient(to left, #ecfd12, #c2bcfd);
+  border-radius: 20px;
 }
-.claim-button{
-    font-family: Whyte;
-    width: 430px;
-    border: none; 
-    margin-top:3%;
-    height: 80px;
-    color: #313439;
-    background: #A3BCB6;
-    border-radius: 20px;
+.claim-button {
+  font-family: Whyte;
+  width: 430px;
+  border: none;
+  margin-top: 3%;
+  height: 80px;
+  color: #313439;
+  background: #c2bcfd;
+  border-radius: 20px;
 }
-.claim-button:hover{
-    font-family: Whyte;
-    width: 430px;
-    border: none; 
-    margin-top:3%;
-    height: 80px;
-    color: #313439;
-    background: #A3BCB6;
-    border-radius: 20px;
+.claim-button:hover {
+  font-family: Whyte;
+  width: 430px;
+  border: none;
+  margin-top: 3%;
+  height: 80px;
+  background: linear-gradient(to right, #c2bcfd, #8576dd);
+  border-radius: 20px;
 }
-.welcome-title{
-    font-family:Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 100%;    
-    align-items: center;
-    text-align: center;
-    text-transform: uppercase;
-    margin-top: -135px;
-    color: #313439;
-
+.welcome-title {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 100%;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: -135px;
+  color: white;
 }
-.welcome-desc{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
-    color: #313439;
+.welcome-desc {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  margin-top: 3%;
+  line-height: 120%;
+  text-align: center;
+  color: white;
 }
-.not-logged-in{
-    text-align: center;
-    margin-top: 20%;
-    font-size: 20px;
-    font-family: Whyte;
+.not-logged-in {
+  text-align: center;
+  margin-top: 20%;
+  font-size: 20px;
+  font-family: Whyte;
+}
+.welcome-wrapper {
+  background-color: #313439 !important;
+  min-height: 100vh;
 }
