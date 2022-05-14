@@ -1,28 +1,24 @@
-import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
-
-
-
-
+import axios from 'axios';
+import React, { createContext, useEffect, useState } from 'react';
 export const myContext = createContext({});
 
-export default function Context(props){
+export default function Context(props) {
+  const [userObject, setUserObject] = useState();
 
-    const [userObject, setUserObject] = useState();
+  useEffect(() => {
+    axios
+      .get(`/auth/login/success`)
+      .then((res) => {
+        console.log('axios object', res);
+        if (res.data) {
+          console.log('response data', res.data.user);
+          setUserObject(res.data.user);
+        }
+      })
+      .catch((err) => console.log({ err }));
+  }, []);
 
-
-    useEffect (() =>{ 
-        axios.get(`${process.env.REACT_APP_BACKEND_URL}/getuser`, {withCredentials: true}).then(res => {
-            console.log("axios object",res)
-            if (res.data){
-                console.log("response data",res)
-                setUserObject(res.data)
-                localStorage.setItem('profile', JSON.stringify(res.data))
-            }
-        })
-    },[])
-
-    return(
+  return (
     <myContext.Provider value={userObject}>{props.children}</myContext.Provider>
-    )
+  );
 }
