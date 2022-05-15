@@ -1,423 +1,409 @@
-.profile-nav{
-    font-family: Grtsk-Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #808195;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
-    margin: 15px 0px;
-    margin-top: 200px;
-    margin-left: 50px;
+.profile-nav {
+  font-family: Grtsk-Zetta;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #808195;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 15px 0px;
+  margin-top: 200px;
+  margin-left: 50px;
 }
-.profile-nav div{
-    margin-bottom: 25px;
-}
-
-.back-to-marketplace{
-    padding-bottom: 250px;
-    float: left;
-    font-family: Grtsk Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #313439;
-}
-.right-profile-menu{
-    float: right;
-}
-.current-patronage{
-    width: 100%;
-    height: 190px;
-    background: #F7F7FC;
-    border-radius: 30px;
-}
-.deposit-subscription-button{
-    height: 87px;
-    background: #4946E6;
-    border: none;
-    border-radius: 1000px;
-    margin: 0 auto;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: white;
-}
-.deposit-subscription-button:hover{
-    background: linear-gradient(87.79deg, #3B50FF 5.12%, #8794FF 98.62%);
-}
-.cancel-subscription-button:hover{
-    background: #BAC2FF;
-
-}
-.collect-patronage:hover{
-    background: linear-gradient(87.79deg, #3B50FF 5.12%, #8794FF 98.62%);
-}
-.see-more-subscribers{
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 3%;
-    
-}
-.price-desc{
-    font-family: Grtsk Zetta;
-    padding: 20px;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 15px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #B2B2C1;
-}
-.price-dollars{
-    padding: 20px;
-    font-family: Whyte Inktrap;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 100%;    
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    color: #B2B2C1;
-}
-.collect-row{
-    padding: 20px;
-    padding-left: 0px;
-}
-.nav-item{
-    font-family: Grtsk Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #313439;
-}
-.active-listing-nft{
-    margin-bottom: 40px;
+.profile-nav div {
+  margin-bottom: 25px;
 }
 
-.active-subscription-desc{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 120%;
-    letter-spacing: 0.01em;
-    color: #808195;
+.back-to-marketplace {
+  padding-bottom: 250px;
+  float: left;
+  font-family: Grtsk Zetta;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #313439;
 }
-.patronage-table-nav{
-    font-family: Grtsk Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #B2B2C1;
+.right-profile-menu {
+  float: right;
 }
-.patronage-table-row{
-    background: #F7F7FC;
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    color: #313439;
-    border-radius: 110px;
-    padding: 23px 1px 23px 12px;
-    margin-top: 1px;
-    margin-left: -13px!important;
+.current-patronage {
+  width: 100%;
+  height: 190px;
+  background: #f7f7fc;
+  border-radius: 30px;
 }
-.button-logout{
-    border:none;
-    font-family: Grtsk-Zetta;
-    font-style: normal;
-    font-weight: normal;
-    background-color: inherit;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #808195;
+.deposit-subscription-button {
+  height: 87px;
+  background: #4946e6;
+  border: none;
+  border-radius: 1000px;
+  margin: 0 auto;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: white;
 }
-.button-logout:hover{
-    border:none;
-    font-family: Grtsk-Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: blue;
+.deposit-subscription-button:hover {
+  background: linear-gradient(87.79deg, #3b50ff 5.12%, #8794ff 98.62%);
 }
-.active-listings{
-    margin-right: 3%;
-    border-bottom: 1px solid #F0F1F9;
-
+.cancel-subscription-button:hover {
+  background: #bac2ff;
 }
-.patronages-row{
-    padding: 20px;
-    padding-left: 0px;
-    padding-bottom: 50px;
-    margin-right: 3%;
-
+.collect-patronage:hover {
+  background: linear-gradient(87.79deg, #3b50ff 5.12%, #8794ff 98.62%);
 }
-.account-settings{
-    padding: 20px;
-    padding-left: 0px;
-    padding-bottom: 100px;
-    border-bottom: 1px solid #F0F1F9;
-    margin-bottom: 30px;
-    margin-right: 3%;
+.see-more-subscribers {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 3%;
 }
-.account-settings .row{
-    margin-top: 40px;
+.price-desc {
+  font-family: Grtsk Zetta;
+  padding: 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #b2b2c1;
 }
-.collected-nfts{
-    padding: 20px;
-    padding-left: 0px;
-    padding-bottom: 50px;
-    border-bottom: 1px solid #F0F1F9;
-    margin-right: 3%;
-
+.price-dollars {
+  padding: 20px;
+  font-family: Whyte Inktrap;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #b2b2c1;
 }
-.radical-nfts{
-    padding: 20px;
-    padding-left: 0px;
-    padding-bottom: 50px;
-    border-bottom: 1px solid #F0F1F9;
-    margin-right: 3%;
-
+.collect-row {
+  padding: 20px;
+  padding-left: 0px;
+}
+.nav-item {
+  font-family: Grtsk Zetta;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #313439;
+}
+.active-listing-nft {
+  margin-bottom: 40px;
 }
 
-.patronage-nfts{
-    padding: 20px;
-    padding-left: 0px;
-    padding-bottom: 50px;
-    border-bottom: 1px solid #F0F1F9;
-    margin-right: 3%;
-    margin-bottom: 50px;
+.active-subscription-desc {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0.01em;
+  color: #808195;
+}
+.patronage-table-nav {
+  font-family: Grtsk Zetta;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #b2b2c1;
+}
+.patronage-table-row {
+  background: #f7f7fc;
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  color: #313439;
+  border-radius: 110px;
+  padding: 23px 1px 23px 12px;
+  margin-top: 1px;
+  margin-left: -13px !important;
+}
+.button-logout {
+  border: none;
+  font-family: Grtsk-Zetta;
+  font-style: normal;
+  font-weight: normal;
+  background-color: inherit;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #808195;
+}
+.button-logout:hover {
+  border: none;
+  font-family: Grtsk-Zetta;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: blue;
+}
+.active-listings {
+  margin-right: 3%;
+  border-bottom: 1px solid #f0f1f9;
+}
+.patronages-row {
+  padding: 20px;
+  padding-left: 0px;
+  padding-bottom: 50px;
+  margin-right: 3%;
+}
+.account-settings {
+  padding: 20px;
+  padding-left: 0px;
+  padding-bottom: 100px;
+  border-bottom: 1px solid #f0f1f9;
+  margin-bottom: 30px;
+  margin-right: 3%;
+}
+.account-settings .row {
+  margin-top: 40px;
+}
+.collected-nfts {
+  padding: 20px;
+  padding-left: 0px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #f0f1f9;
+  margin-right: 3%;
+}
+.radical-nfts {
+  padding: 20px;
+  padding-left: 0px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #f0f1f9;
+  margin-right: 3%;
 }
 
-.price-eth{
-    font-family: Whyte Inktrap;
-    font-style: normal;
-    padding-left: 20px;
-    font-weight: normal;
-    font-size: 40px;
-    line-height: 100%;    
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-    
-    color: #313439;
-}
-.cancel-subscription-button{
-    height: 87px;
-    margin: 0 auto;
-    text-transform: uppercase;
-    color: rgba(49, 52, 57, 0.6);
-    background: rgba(240, 241, 249, 0.5);
-    border-radius: 20px;
-    border: none;
+.patronage-nfts {
+  padding: 20px;
+  padding-left: 0px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #f0f1f9;
+  margin-right: 3%;
+  margin-bottom: 50px;
 }
 
-.collect-patronage{
-    width: 100%;
-    height: 183px;
-    background: #4946E6;
-    color: white;
-    border: none;
-    border-radius: 1000px;
-}
-.listed-nft-desc{
-    margin-top: 20px;
-    padding-left: 5%;
-    padding-right: 5%;
-    height: 370px;
-}
-.profile-section-desc{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 120%;
-    letter-spacing: 0.01em;
-    color: #808195;
-    margin-top: 20px;
-    margin-bottom: 30px;
+.price-eth {
+  font-family: Whyte Inktrap;
+  font-style: normal;
+  padding-left: 20px;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 
+  color: #313439;
 }
-.profile-section-title{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 100%;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-    text-transform: capitalize;
-    color: #313439;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-.profile-section-image{
-    line-height: 100%;
-    display: flex;
-    justify-content: space-between;
-    float: right;
-    margin-top: -2%!important;
-
-}
-.profile-logo-text{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 28px;
-    line-height: 100%;
-    display: flex;
-    text-decoration: none;
-    align-items: center;
-    letter-spacing: 0.01em;
-    text-transform: capitalize;
-    color: #313439;
-    margin-top: 5%;
-}
-.profile-page{
-    padding-left: 20px;
-}
-.total-patronage{
-    width: 100%;
-    height: 190px;
-    background: #F7F7FC;
-    padding-right: 20px;
-    border-radius: 30px;
-}
-.deposit-patronage{
-    width: 100%;
-    height: 190px;
-    background: #F7F7FC;
-    border-radius: 30px;
-}
-.box
-{
-    padding-right: 20px;
+.cancel-subscription-button {
+  height: 87px;
+  margin: 0 auto;
+  text-transform: uppercase;
+  color: rgba(49, 52, 57, 0.6);
+  background: rgba(240, 241, 249, 0.5);
+  border-radius: 20px;
+  border: none;
 }
 
-.total-patronage{
-    width: 100%;
-    height: 190px;
-    background: #F7F7FC;
-    border-radius: 30px;
+.collect-patronage {
+  width: 100%;
+  height: 183px;
+  background: #4946e6;
+  color: white;
+  border: none;
+  border-radius: 1000px;
+}
+.listed-nft-desc {
+  margin-top: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
+  height: 370px;
+}
+.profile-section-desc {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: 0.01em;
+  color: #808195;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.profile-section-title {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  color: #313439;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.profile-section-image {
+  line-height: 100%;
+  display: flex;
+  justify-content: space-between;
+  float: right;
+  margin-top: -2% !important;
+}
+.profile-logo-text {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 100%;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  color: #313439;
+  margin-top: 5%;
+}
+.profile-page {
+  padding-left: 20px;
+}
+.total-patronage {
+  width: 100%;
+  height: 190px;
+  background: #f7f7fc;
+  padding-right: 20px;
+  border-radius: 30px;
+}
+.deposit-patronage {
+  width: 100%;
+  height: 190px;
+  background: #f7f7fc;
+  border-radius: 30px;
+}
+.box {
+  padding-right: 20px;
 }
 
-
-.right-profile{
-    height: 1500px;
-    margin-left: 28%;
-    margin-top: 30px;
+.total-patronage {
+  width: 100%;
+  height: 190px;
+  background: #f7f7fc;
+  border-radius: 30px;
 }
 
-.left-profile{
-    background: #DADED4;
-    margin: 0;
-    height: 100%; 
-    overflow: hidden;
-    position: fixed;
-    margin-top:-4%;
-}
-.row{
-    --bs-gutter-x: 0rem!important;
-
+.right-profile {
+  height: 1500px;
+  margin-left: 28%;
+  margin-top: 30px;
 }
 
-.logo-profile{
-    margin-left: 50px;
-    margin-top: 30px;
+.left-profile {
+  background: #dfdeff;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  margin-top: -4%;
 }
-.settings-button{
-    align-items: center;
-    height: 120px;
-    border: none;    
-    width: 100%;
-    background: #9795DC;
-    border-radius: 1000px;
-    font-family: Grtsk Zetta;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #FFFFFF;
+.row {
+  --bs-gutter-x: 0rem !important;
+}
 
+.logo-profile {
+  margin-left: 50px;
+  margin-top: 30px;
 }
-.profile-nav a{
-    text-decoration: none;
-    color: #3C403D;
+.settings-button {
+  align-items: center;
+  height: 120px;
+  border: none;
+  width: 100%;
+  background: #9795dc;
+  border-radius: 1000px;
+  font-family: Grtsk Zetta;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.profile-nav a {
+  text-decoration: none;
+  color: #3c403d;
 }
 .profile-nav a:hover {
-    text-decoration: none;
-    color: #39603D;
+  text-decoration: none;
+  color: #39603d;
 }
-.manage-funds-buttons{
-    padding-right: 7%;
-    padding-left: 7%;
+.manage-funds-buttons {
+  padding-right: 7%;
+  padding-left: 7%;
+}
+.my-subscriptions {
+  margin-top: 4%;
+}
+.my-subscription-text {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
 
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  color: #313439;
 }
-.my-subscriptions{
-    margin-top: 4%;
-
+.my-users-text {
+  font-family: Whyte;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  margin-top: 10%;
+  margin-bottom: 6%;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  color: #313439;
 }
-.my-subscription-text{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 32px;
-
-    line-height: 100%;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-    text-transform: capitalize;
-    color: #313439;
+.settings-field {
+  background: #f7f7fc;
+  height: 120px;
+  border-radius: 30px;
+  width: 100%;
 }
-.my-users-text{
-    font-family: Whyte;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 32px;
-    margin-top: 10%;
-    margin-bottom: 6%;
-    line-height: 100%;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-    text-transform: capitalize;
-    color: #313439;
-}
-.settings-field{
-    background: #F7F7FC;
-    height: 120px;
-    border-radius: 30px;
-    width: 100%;
-}
-.nav-link{
-    color: black!important;
+.nav-link {
+  color: black !important;
 }
