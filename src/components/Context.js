@@ -7,7 +7,7 @@ export default function Context(props) {
 
   useEffect(() => {
     axios
-      .get(`/auth/login/success`)
+      .get(`/getuser`)
       .then((res) => {
         console.log('axios object', res);
         if (res.data) {
