@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
-export const myContext = createContext({});
+export const myContext = createContext(null);
 
 export default function Context(props) {
   const [userObject, setUserObject] = useState();

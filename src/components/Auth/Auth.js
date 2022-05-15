@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { myContext } from '../Context';
 import './Auth.css';
 import '../../fonts.css';
 import twitterLogo from '../../assets/images/Twitter.png';
@@ -6,10 +7,11 @@ import axios from 'axios';
 import queryString from 'query-string';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { useNavigate } from 'react-router-dom';
 
 function Auth() {
-  console.log(process.env.REACT_APP_AUTH_TWITTER);
-
+  const userObject = useContext(myContext);
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState();
   const [imageUrl, setImageUrl] = useState();
@@ -33,7 +35,9 @@ function Auth() {
   const callback = () => {
     window.location.href = process.REACT_APP_CALLBACK_TWITTER;
   };
-
+  if (userObject) {
+    navigate('/welcome');
+  }
   return (
     <div>
       <div className='centeredBox'>
