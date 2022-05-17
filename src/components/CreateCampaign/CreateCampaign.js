@@ -98,7 +98,7 @@ function Campaign() {
   useEffect(async () => {
     if (!userObject) return;
     const protopypess = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/campaign/getNFTPrototype/${userObject.username}`
+      `/api/campaign/getNFTPrototype/${userObject.username}`
     );
     setUserNFTPrototype(protopypess);
     setCampaignNftID(protopypess.data[0].file);
@@ -178,10 +178,7 @@ function Campaign() {
     } else {
       setCampaignFormError('Fill in the correct fields');
     }
-    const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/campaign/create`,
-      content
-    );
+    const response = await axios.post(`/api/campaign/create`, content);
     if (response.status == 200) {
       //campaign successfully created creation successful modal ->  display it under profile
       onOpenSuccessCampaign(e);

@@ -32,7 +32,7 @@ function ClaimPage() {
 
   const checkClaims = async function () {
     const allCampaignsTwitterPost = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/claim/getAllClaimsByUser/${userObject.username}`
+      `/api/claim/getAllClaimsByUser/${userObject.username}`
     );
     if (allCampaignsTwitterPost.data == 'none') {
       console.log(allCampaignsTwitterPost);

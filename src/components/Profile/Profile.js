@@ -18,7 +18,7 @@ export default function Profile() {
     if (!userObject) return;
     //get all campaigns the user has
     const claimedNFTS = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/claim/getClaimedNFTs/${userObject.username}`
+      `/api/claim/getClaimedNFTs/${userObject.username}`
     );
 
     console.log('claimed', claimedNFTS.data);
@@ -49,7 +49,7 @@ export default function Profile() {
 
     // /campaign/all/:handle
     const campaigns = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/campaign/all/${userObject.username}`
+      `/api/campaign/all/${userObject.username}`
     );
     console.log(campaigns.data);
     setAllCampaigns(campaigns);
