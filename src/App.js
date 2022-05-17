@@ -20,7 +20,6 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.withCredentials = true;
 
 function App() {
-  const userObject = useContext(myContext);
   return (
     <div>
       <BrowserRouter>
@@ -30,7 +29,7 @@ function App() {
           <Route path='/createcampaign' exact element={<CreateCampaign />} />
           <Route path='/profile' exact element={<Profile />} />
           <Route path='/welcome' exact element={<Welcome />} />
-          <Route path='/claim' exact element={<ClaimPage />} /> \
+          <Route path='/claim' exact element={<ClaimPage />} />
         </Routes>
       </BrowserRouter>
     </div>

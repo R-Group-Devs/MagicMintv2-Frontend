@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 export default function Welcome() {
   const userObject = useContext(myContext);
-
+  console.log(userObject);
   if (userObject) {
     return (
       <div className=''>
