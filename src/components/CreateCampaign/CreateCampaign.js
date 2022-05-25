@@ -99,9 +99,7 @@ function Campaign() {
   //getting created NFTS
   useEffect(async () => {
     if (!userObject) return;
-    const prototypess = await axios.get(
-      `/api/campaign/getNFTPrototype/${userObject.username}`
-    );
+    const prototypess = await axios.get(`/api/campaign/getNFTPrototype`);
     setUserNFTPrototype(prototypess?.data ?? []);
   }, [userObject]);
 
