@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect, useRef, useMemo } from 'react';
 import './CreateCampaign.css';
 import Header from '../Navbar/Header';
 import 'react-responsive-modal/styles.css';
@@ -43,7 +43,7 @@ function Campaign() {
   }
   const nftFileRef = useRef(null);
   // form for creating campaign
-  const [userNFTPrototype, setUserNFTPrototype] = useState(null);
+  const [userNFTPrototype, setUserNFTPrototype] = useState([]);
   const [twitterPost, setTwitterPost] = useState({
     id: null,
     url: '',
@@ -51,7 +51,6 @@ function Campaign() {
   const [campaignName, setCampaignName] = useState('');
   const [campaignFormIsValid, setCampaignFormIsValid] = useState(false);
   const [numberOfNFTs, setNumberOfNFTs] = useState('');
-  const [collection, setCollection] = useState('');
   const [countOldReshares, setCountOldReshares] = useState(true);
   const [countOldLikes, setCountOldLikes] = useState(true);
   const [campaignBase, setCampaignBase] = useState('likes');
@@ -66,7 +65,8 @@ function Campaign() {
     useState(true);
 
   //Graph data
-  const [graphCollections, setGraphCollection] = useState(null);
+  const [graphCollection, setGraphCollection] = useState([]);
+  const [collectionAddress, setCollectionAddress] = useState('');
 
   //create campaign success message
   const [successFormModal, setSuccessFormModal] = useState(false);
@@ -86,8 +86,6 @@ function Campaign() {
   const [campaignNameError, setCampaignNameError] = useState('');
   const [twitterPostURLError, setTwitterPostURLError] = useState('');
 
-  const [optionItems, setOptionItems] = useState('');
-
   const client = createClient({
     url: shellGraphRinkebyURL,
   });
@@ -95,30 +93,18 @@ function Campaign() {
   // querying the graph for collection data
   useEffect(async () => {
     const graphdata = await client.query(query).toPromise();
-    collections = graphdata.data.collections.map((collection) => (
-      <option key={collection.address} value={collection.address}>
-        {collection.name} - {collection.symbol}
-      </option>
-    ));
-    console.log(graphdata.data.collections);
-    setGraphCollection(collections);
+    setGraphCollection(graphdata?.data?.collections ?? []);
   }, []);
 
   //getting created NFTS
   useEffect(async () => {
     if (!userObject) return;
-    const protopypess = await axios.get(
+    const prototypess = await axios.get(
       `/api/campaign/getNFTPrototype/${userObject.username}`
     );
-    setUserNFTPrototype(protopypess);
-    setCampaignNftID(protopypess?.data[0]?.file);
-    let items = protopypess.data.map((prototype) => (
-      <option key={prototype.file} value={prototype.file}>
-        {prototype.name}
-      </option>
-    ));
-    setOptionItems(items);
+    setUserNFTPrototype(prototypess?.data ?? []);
   }, [userObject]);
+
   const [myTweets, setMyTweets] = useState(
     {
       areLoading: true,
@@ -160,47 +146,36 @@ function Campaign() {
     e.preventDefault();
     const formData = new FormData();
 
-    const extension = NFTFile.type.split('/')[1];
-
-    formData.append('image', NFTFile, 'filename.' + extension);
-
-    formData.append('creator', userObject.username);
     formData.append('file', NFTFile);
     formData.append('name', NFTName);
     formData.append('description', NFTDesc);
-
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' },
-    };
-
-    axios({
-      url: `${process.env.REACT_APP_BACKEND_URL}/api/campaign/createNFT`,
-      method: 'POST',
+    
+    axios.post('/api/campaign/createNFT', formData,{
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'application/json',
         type: 'formData',
-      },
-      data: formData,
-    }).then((res) => {
+      }
+    }, ).then((res) => {
       alert('NFT created successfully');
       setCreateNFTModal(false);
-    });
+      setUserNFTPrototype((prevState) => [...prevState, res.data]);
+    }).catch((err) => console.log(err))
   };
-
+  console.log(endDate);
   const createCamapignSubmit = async (e) => {
     e.preventDefault();
 
     const content = {
-      campaignCreator: userObject.username,
-      twitterPostURL: twitterPost.url,
+      twitterPostID: twitterPost.id,
       campaignName: campaignName,
       campaignNFTID: campaignNFTID,
+      collectionAddress: collectionAddress,
       numberOfNFTs: numberOfNFTs,
       campaignBase: campaignBase,
       includeResharesBeforeCreation: countOldReshares,
       includeLikesBeforeCreation: countOldLikes,
-      endDate: endDate ? endDate : addHours(Date.now(), 1),
+      endDate: endDate,
     };
 
     if (campaignFormIsValid) {
@@ -224,6 +199,11 @@ function Campaign() {
     });
     setSelectTweetModal(false);
   };
+
+  const nftImage = useMemo(() => {
+    if(!NFTFile) return null;
+    return URL.createObjectURL(NFTFile);
+  }, [NFTFile]);
 
   if (userObject) {
     return (
@@ -358,11 +338,22 @@ function Campaign() {
                 <div className='form-group'>
                   <select
                     className='form-select form-select-md mb-3'
+                    value={collectionAddress}
                     onChange={(e) => {
-                      setCollection(e.target.value);
+                      setCollectionAddress(e.target.value);
                     }}
                   >
-                    {graphCollections}
+                    <option value=''>
+                      None
+                    </option>
+                    {graphCollection.map((collection) => (
+                      <option
+                        key={collection.address}
+                        value={collection.address}
+                      >
+                        {collection.name} - {collection.symbol}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -382,14 +373,14 @@ function Campaign() {
                     //get nfts where creator is the logged in creator/
                     // the value is the actual id, when clicked store nft ID for the campaign
                     setCampaignNftID(e.target.value);
-                    console.log('just target', e.target);
-                    console.log('value of changed', e.target.value);
                   }}
                 >
-                  {/* <option value="1" selected="selected">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option> */}
-                  {optionItems}
+                  <option value=''>None</option>
+                  {userNFTPrototype.map((prototype) => (
+                    <option key={prototype._id} value={prototype._id}>
+                      {prototype.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               {/* <img src={{/> */}
@@ -458,8 +449,9 @@ function Campaign() {
               )}
 
               <div className='form-group'>
-                <label>Campaign Ends on</label><br></br>
-                <DateTimePicker value={endDate} onChange={setEndDate}/>
+                <label>Campaign Ends on</label>
+                <br></br>
+                <DateTimePicker value={endDate} onChange={setEndDate} />
               </div>
               <div className='cc-button-div'>
                 <button
@@ -487,7 +479,7 @@ function Campaign() {
                   onChange={(e) => {
                     const newFile = e.target.files[0];
                     if (newFile) {
-                      setNFTFile(URL.createObjectURL(newFile));
+                      setNFTFile(newFile);
                       if (NFTName !== '' && NFTDesc !== '') {
                         setButtonCreateNFTIsDisabled(false);
                       }
@@ -502,7 +494,7 @@ function Campaign() {
                   onClick={() => nftFileRef?.current?.click()}
                 >
                   {NFTFile ? (
-                    <img className='createNft-image' src={NFTFile} />
+                    <img className='createNft-image' src={nftImage} />
                   ) : (
                     <AddIcon className='icon-add' />
                   )}
