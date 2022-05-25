@@ -59,11 +59,142 @@
     background-color: #39603D!important;
     border-radius: 10px!important;
     font-size: 16px!important;
+    color: white!important;
+    transition: linear 250ms !important;
 }
 .cc-btn:hover{
+    cursor: pointer;
+    transform: scale(1.05) !important;
+}
+
+.open-tweets-btn {
+    width: 200px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 15px 0;
+    background-color: #a3bcb6;
+    font-size: 20px;
+    margin: auto;
+    transition: linear 0.2s;
+}
+
+.open-tweets-btn:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.tweet-wrap {
+    background-color: #eee;
+    border-radius: 10px;
+    height: 350px;
+    overflow: overlay;   
+}
+
+.tweet-wrap:hover {
+    transform: scale(1.03);
+    transition: linear 250ms;
+} 
+
+.twitter-tweet {
+    margin: 0 !important;
+}
+
+.form-check-input:hover {
+    cursor: pointer;
+}
+
+.baseCampaign {
+    margin: 15px 0 10px 0;
+}
+
+.baseCampaign .campaign-base-text {
+    margin-bottom: 5px;
+}
+/* hide input default arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.count-old {
+    margin: 15px 0 10px 0;
+}
+
+.createNft {
+    display: flex;
+
+}
+
+.createNft-left {
+    width: 250px;
+    margin-right: 20px;
+}
+
+.createNft-image-placeholder {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(218, 222, 212, 0.6); 
+    /* #DADED4 */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.createNft-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.createNft-image-placeholder:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.createNft-image-placeholder:hover svg {
+    transform: scale(1.05);
+    transition: ease-in 250ms;
+}
+
+.icon-add {
+    height: 60%;
+    fill: rgb(163, 188, 182, 0.6);
+    /* #a3bcb6 */
+}
+
+.createNft-right {
+    width: 250px;
+}
+
+.nft-input {
+    display: none;
+}
+
+.nftDescription {
+    margin: 0;
+    height: 150px;
+    resize: none;
+}
+
+.createNft-button {
+    margin-left: 50%;
+    transform: translateX(-50%);
     border: none!important;
     background-color: #39603D!important;
     border-radius: 10px!important;
-    font-size: 18px!important;
+    font-size: 16px!important;
+    color: white!important;
+    transition: linear 250ms !important;
+}
 
+.createNft-button:hover{
+    cursor: pointer;
+    transform: translateX(-50%) scale(1.05) !important;
 }

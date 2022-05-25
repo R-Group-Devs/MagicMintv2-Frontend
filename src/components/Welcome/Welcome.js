@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import './Welcome.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Navbar/Header';
 import { myContext } from '../Context';
 import { useContext } from 'react';
 
 export default function Welcome() {
   const userObject = useContext(myContext);
-  console.log(userObject);
+  const navigate = useNavigate();
   if (userObject) {
     return (
       <div className=''>
@@ -24,19 +24,18 @@ export default function Welcome() {
                 Greetings, {userObject?.username} 👋{' '}
               </div>
               <div className='welcome-desc'></div>
-              <button className='campaign-button'>
-                <Link className='text-link' to='/createcampaign'>
-                  {' '}
-                  Create a campaign
-                </Link>
+              <button
+                className='campaign-button'
+                onClick={() => navigate('/createcampaign')}
+              >
+                Create a campaign
               </button>
               <br></br>
-              <button className='claim-button' disabled>
-                {' '}
-                <Link className='text-link' to='/claim'>
-                  {' '}
+              <button
+                className='claim-button'
+                onClick={() => navigate('/claim')}
+              >
                   Claim your nft
-                </Link>{' '}
               </button>
             </div>
           </div>

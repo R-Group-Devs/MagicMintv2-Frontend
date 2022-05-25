@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import './CreateCampaign.css';
 import Header from '../Navbar/Header';
 import 'react-responsive-modal/styles.css';
@@ -6,6 +6,10 @@ import { Modal } from 'react-responsive-modal';
 import { createClient } from 'urql';
 import axios from 'axios';
 import { myContext } from '../Context';
+import { useNavigate } from 'react-router-dom';
+import TweetsCards from './TweetsCards';
+import { ReactComponent as AddIcon } from '../../assets/icons/add.svg';
+import DateTimePicker from 'react-datetime-picker';
 
 const shellGraphRinkebyURL =
   'https://api.thegraph.com/subgraphs/name/r-group-devs/shell-rinkeby';
@@ -31,16 +35,19 @@ const query = `
 
 function Campaign() {
   const userObject = useContext(myContext);
-
+  const navigate = useNavigate();
   function addHours(date, hours) {
     const newDate = new Date(date);
     newDate.setHours(newDate.getHours() + hours);
     return newDate;
   }
-
+  const nftFileRef = useRef(null);
   // form for creating campaign
   const [userNFTPrototype, setUserNFTPrototype] = useState(null);
-  const [twitterPostURL, setTwitterPostURL] = useState('');
+  const [twitterPost, setTwitterPost] = useState({
+    id: null,
+    url: '',
+  });
   const [campaignName, setCampaignName] = useState('');
   const [campaignFormIsValid, setCampaignFormIsValid] = useState(false);
   const [numberOfNFTs, setNumberOfNFTs] = useState('');
@@ -49,12 +56,14 @@ function Campaign() {
   const [countOldLikes, setCountOldLikes] = useState(false);
   const [campaignBase, setCampaignBase] = useState('likes');
   const [campaignNFTID, setCampaignNftID] = useState('');
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState(
+    new Date(new Date().setHours(new Date().getHours() + 1))
+  );
   const [campaignFormError, setCampaignFormError] = useState(false);
   const [buttonCreateCampaignIsDisabled, setButtonCreateCampaignIsDisabled] =
     useState('true');
   const [buttonCreateNFTIsDisabled, setButtonCreateNFTIsDisabled] =
-    useState('true');
+    useState(true);
 
   //Graph data
   const [graphCollections, setGraphCollection] = useState(null);
@@ -64,8 +73,9 @@ function Campaign() {
 
   // form for creating nft
   const [createNFTModal, setCreateNFTModal] = useState(false);
-  const [NFTName, setNFTName] = useState(null);
-  const [NFTDesc, setNFTDesc] = useState(null);
+  const [selectTweetModal, setSelectTweetModal] = useState(false);
+  const [NFTName, setNFTName] = useState('');
+  const [NFTDesc, setNFTDesc] = useState('');
   const [NFTFile, setNFTFile] = useState(null);
 
   let isDisabled = 'disabled';
@@ -101,7 +111,7 @@ function Campaign() {
       `/api/campaign/getNFTPrototype/${userObject.username}`
     );
     setUserNFTPrototype(protopypess);
-    setCampaignNftID(protopypess.data[0].file);
+    setCampaignNftID(protopypess?.data[0]?.file);
     let items = protopypess.data.map((prototype) => (
       <option key={prototype.file} value={prototype.file}>
         {prototype.name}
@@ -109,6 +119,29 @@ function Campaign() {
     ));
     setOptionItems(items);
   }, [userObject]);
+  const [myTweets, setMyTweets] = useState(
+    {
+      areLoading: true,
+      tweets: [],
+    },
+    []
+  );
+  useEffect(() => {
+    axios
+      .get('/getMyTweets')
+      .then((res) => {
+        setMyTweets({
+          areLoading: false,
+          tweets: res.data,
+        });
+      })
+      .catch((err) => {
+        setMyTweets({
+          areLoading: false,
+          tweets: [],
+        });
+      });
+  }, []);
 
   const onOpenModal = (e) => {
     e.preventDefault();
@@ -120,7 +153,7 @@ function Campaign() {
   };
   const onCloseSuccessCampaignModal = () => {
     setSuccessFormModal(false);
-    window.location.href = '/profile';
+    navigate('/profile');
   };
 
   const createNFT = async (e) => {
@@ -151,10 +184,7 @@ function Campaign() {
       data: formData,
     }).then((res) => {
       alert('NFT created successfully');
-
-      setTimeout(() => {
-        window.location.href = '/createcampaign';
-      }, 2000);
+      setCreateNFTModal(false);
     });
   };
 
@@ -163,7 +193,7 @@ function Campaign() {
 
     const content = {
       campaignCreator: userObject.username,
-      twitterPostURL: twitterPostURL,
+      twitterPostURL: twitterPost.url,
       campaignName: campaignName,
       campaignNFTID: campaignNFTID,
       numberOfNFTs: numberOfNFTs,
@@ -187,6 +217,14 @@ function Campaign() {
 
   const onCloseModal = () => setCreateNFTModal(false);
 
+  const onTweetCardClick = (tweetId, tweetUrl) => {
+    setTwitterPost({
+      id: tweetId,
+      url: tweetUrl,
+    });
+    setSelectTweetModal(false);
+  };
+
   if (userObject) {
     return (
       <div>
@@ -198,7 +236,7 @@ function Campaign() {
           <div className='cc-title'>Create a campaign</div>
           <div className='form-modal '>
             <form className='form-box'>
-              <div className='form-group'>
+              <div className='form-group' style={{ marginBottom: '40px' }}>
                 <label htmlFor='twitterHandle'>Twitter Handle</label>
                 <input
                   type='text'
@@ -209,39 +247,45 @@ function Campaign() {
                   disabled
                 />
               </div>
-              <div className='form-group'>
-                <label htmlFor='postID'>Twitter Post URL</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  id='postID'
-                  aria-describedby='twitterHandleDesc'
-                  onChange={(e) => {
-                    const splitable = e.target.value;
-                    const splitID = splitable.split('/');
-                    setTwitterPostURL(splitID[5]);
-
-                    let expression =
-                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
-                    let regex = new RegExp(expression);
-                    if (
-                      e.target.value.match(regex) &&
-                      e.target.value.length != 0
-                    ) {
-                      setCampaignFormIsValid(true);
-                      setTwitterPostURLError('');
-                      setButtonCreateCampaignIsDisabled('');
-                    } else {
-                      setTwitterPostURLError('Please enter valid URL');
-                      setCampaignFormIsValid(false);
-                      setButtonCreateCampaignIsDisabled('true');
-                    }
+              <div
+                className=''
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginBottom: '20px',
+                }}
+              >
+                <button
+                  className='open-tweets-btn'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectTweetModal(true);
                   }}
-                />
-                <small className='form-text  text-danger'>
+                >
+                  Select Tweet
+                </button>
+                <small className='form-text text-danger'>
                   {' '}
                   {twitterPostURLError}
                 </small>
+                {twitterPost.id && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span>Selected tweet:</span>{' '}
+                    <a
+                      href={twitterPost.url}
+                      style={{ textDecoration: 'none' }}
+                      target='_blank'
+                    >
+                      <b>{twitterPost.url}</b>
+                    </a>
+                  </div>
+                )}
               </div>
               <div className='form-group'>
                 <label htmlFor='campaignName'>Campaign Name</label>
@@ -282,7 +326,7 @@ function Campaign() {
                     name='inlineRadioOptions'
                     id='inlineRadio1'
                     value='likes'
-                    checked='checked'
+                    checked={campaignBase === 'likes'}
                     onChange={(e) => {
                       setCampaignBase(e.target.value);
                     }}
@@ -298,6 +342,7 @@ function Campaign() {
                     name='inlineRadioOptions'
                     id='inlineRadio2'
                     value='reshares'
+                    checked={campaignBase === 'reshares'}
                     onChange={(e) => {
                       setCampaignBase(e.target.value);
                     }}
@@ -308,17 +353,18 @@ function Campaign() {
                   </label>
                 </div>
               </div>
-
-              <div>Choose collection</div>
-              <div className='form-group'>
-                <select
-                  className='form-select form-select-md mb-3'
-                  onChange={(e) => {
-                    setCollection(e.target.value);
-                  }}
-                >
-                  {graphCollections}
-                </select>
+              <div>
+                <div>Choose collection</div>
+                <div className='form-group'>
+                  <select
+                    className='form-select form-select-md mb-3'
+                    onChange={(e) => {
+                      setCollection(e.target.value);
+                    }}
+                  >
+                    {graphCollections}
+                  </select>
+                </div>
               </div>
               <div>Campaign NFT</div>
               <small id='' className='form-text text-muted'>
@@ -351,33 +397,26 @@ function Campaign() {
               <div className='form-group'>
                 <label htmlFor='numberNFTs'>Number of NFTs</label>
                 <input
-                  type='text'
+                  type='number'
                   className='form-control'
                   id='numberNFTs'
                   aria-describedby='twitterHandleDesc'
                   value={numberOfNFTs}
                   onChange={(e) => {
                     setNumberOfNFTs(e.target.value);
-                    let expressionOnlyNumber = /^\d+$/;
-
-                    let regexOnlyNumber = new RegExp(expressionOnlyNumber);
-
-                    if (e.target.value > 1000) {
-                      setCampaignFormIsValid(false);
-                      setNumberOfNFTsError(
-                        'You exceed the number of NFTs! Please enter less than 1000 NFTs'
-                      );
-                      setButtonCreateCampaignIsDisabled('true');
-                    } else if (!e.target.value.match(regexOnlyNumber)) {
-                      setNumberOfNFTsError('Please include only numbers');
-                      setButtonCreateCampaignIsDisabled('true');
-                      setCampaignFormIsValid(false);
-                    } else if (e.target.value == null || e.target.value == 0) {
+                    const newVal = parseInt(e.target.value);
+                    if (isNaN(newVal) || newVal === 0) {
                       setNumberOfNFTsError(
                         "Don't leave the number of NFTs blank"
                       );
                       setButtonCreateCampaignIsDisabled('true');
                       setCampaignFormIsValid(false);
+                    } else if (newVal > 1000) {
+                      setCampaignFormIsValid(false);
+                      setNumberOfNFTsError(
+                        'You exceed the number of NFTs! Please enter less than 1000 NFTs'
+                      );
+                      setButtonCreateCampaignIsDisabled('true');
                     } else {
                       setCampaignFormIsValid(true);
                       setNumberOfNFTsError('');
@@ -392,26 +431,26 @@ function Campaign() {
               </div>
 
               {campaignBase.includes('reshares') ? (
-                <div className='form-check'>
+                <div className='form-check count-old'>
                   <input
                     className='form-check-input'
                     type='checkbox'
+                    checked={countOldReshares}
                     onChange={(e) => {
                       setCountOldReshares(e.target.checked);
-                      console.log(e.target.checked);
                     }}
                   />
                   <label className='form-check-label'>Count old Reshares</label>
                 </div>
               ) : (
-                <div className='form-check'>
+                <div className='form-check count-old'>
                   <input
                     className='form-check-input'
                     type='checkbox'
                     id='count'
+                    checked={countOldLikes}
                     onChange={(e) => {
                       setCountOldLikes(e.target.checked);
-                      console.log(e.target.checked);
                     }}
                   />
                   <label className='form-check-label'>Count old Likes</label>
@@ -419,33 +458,8 @@ function Campaign() {
               )}
 
               <div className='form-group'>
-                <label>Campaign Ends in</label>
-
-                <select
-                  className='form-select form-select-md mb-3'
-                  onChange={(e) => {
-                    if (e.target.value == 1) {
-                      setEndDate(addHours(Date.now(), 1));
-                      console.log(endDate);
-                    } else if (e.target.value == 2) {
-                      setEndDate(addHours(Date.now(), 12));
-                      console.log(endDate);
-                    } else if (e.target.value == 3) {
-                      setEndDate(addHours(Date.now(), 24));
-                      console.log(endDate);
-                    } else if (e.target.value == 4) {
-                      setEndDate(addHours(Date.now(), 168));
-                      console.log(endDate);
-                    } else {
-                    }
-                    console.log(e.target.value);
-                  }}
-                >
-                  <option value='1'>1 hour</option>
-                  <option value='2'>12 hours</option>
-                  <option value='3'>1 day</option>
-                  <option value='4'>1 week</option>
-                </select>
+                <label>Campaign Ends on</label><br></br>
+                <DateTimePicker value={endDate} onChange={setEndDate}/>
               </div>
               <div className='cc-button-div'>
                 <button
@@ -461,68 +475,82 @@ function Campaign() {
           </div>
 
           <Modal open={createNFTModal} onClose={onCloseModal} center>
-            <h3>Create NFT</h3>
-            <div className='form-group'>
-              <label htmlFor='NFTimage'>Choose File</label>
-              <input
-                type='file'
-                style={{ display: 'none' }}
-                className='form-control-file'
-                id='NFTimage'
-                onChange={(e) => {
-                  console.log(e.target.files[0]);
-                  setNFTFile(e.target.files[0]);
-                  if (e.target.files[0] != null) {
-                  }
-                  if (
-                    e.target.files[0] != null &&
-                    NFTName != null &&
-                    NFTDesc != null
-                  ) {
-                    console.log('aha');
-                    setButtonCreateNFTIsDisabled('');
-                  }
-                }}
-              />
-              {NFTFile ? NFTFile.name : ''}
-            </div>
-            <div className='form-group'>
-              <label htmlFor='NFTname'>Name</label>
-              <input
-                type='text'
-                className='form-control'
-                id='NFTname'
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setNFTName(e.target.value);
+            <h3 className='mb-3'>Create NFT</h3>
+            <div className='createNft'>
+              <div className='createNft-left'>
+                <input
+                  type='file'
+                  id='file'
+                  name='imageName'
+                  ref={nftFileRef}
+                  className='nft-input'
+                  onChange={(e) => {
+                    const newFile = e.target.files[0];
+                    if (newFile) {
+                      setNFTFile(URL.createObjectURL(newFile));
+                      if (NFTName !== '' && NFTDesc !== '') {
+                        setButtonCreateNFTIsDisabled(false);
+                      }
+                    } else {
+                      setButtonCreateNFTIsDisabled(true);
+                    }
+                  }}
+                  accept='.png,.jpg,.jpeg'
+                />
+                <div
+                  className='createNft-image-placeholder'
+                  onClick={() => nftFileRef?.current?.click()}
+                >
+                  {NFTFile ? (
+                    <img className='createNft-image' src={NFTFile} />
+                  ) : (
+                    <AddIcon className='icon-add' />
+                  )}
+                </div>
+              </div>
+              <div className='createNft-right'>
+                <div className='form-group'>
+                  <label htmlFor='NFTname'>Name</label>
+                  <input
+                    type='text'
+                    className='form-control'
+                    id='NFTname'
+                    value={NFTName}
+                    onChange={(e) => {
+                      const newVal = e.target.value;
+                      setNFTName(newVal);
 
-                  if (NFTFile != null && NFTName != null && NFTDesc != null) {
-                    console.log('aha');
-                    setButtonCreateNFTIsDisabled('');
-                  }
-                }}
-              />
-            </div>
-            <div className='form-group'>
-              <label htmlFor='NFTdescription'>Description</label>
-              <input
-                type='text'
-                className='form-control'
-                id='NFTdescription'
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setNFTDesc(e.target.value);
-
-                  if (NFTFile != null && NFTName != null && NFTDesc != null) {
-                    console.log('aha');
-                    setButtonCreateNFTIsDisabled('');
-                  }
-                }}
-              />
+                      if (NFTFile !== null && newVal !== '' && NFTDesc !== '') {
+                        setButtonCreateNFTIsDisabled(false);
+                      } else {
+                        setButtonCreateNFTIsDisabled(true);
+                      }
+                    }}
+                  />
+                </div>
+                <div className='form-group  mb-0'>
+                  <label htmlFor='NFTdescription'>Description</label>
+                  <textarea
+                    type='text'
+                    className='form-control nftDescription'
+                    id='NFTdescription'
+                    value={NFTDesc}
+                    onChange={(e) => {
+                      const newVal = e.target.value;
+                      setNFTDesc(newVal);
+                      if (NFTFile !== null && NFTName !== '' && newVal !== '') {
+                        setButtonCreateNFTIsDisabled(false);
+                      } else {
+                        setButtonCreateNFTIsDisabled(true);
+                      }
+                    }}
+                  />
+                </div>
+              </div>
             </div>
             <button
               type='submit'
-              className='btn btn-primary'
+              className='btn btn-lg mt-4 createNft-button '
               onClick={createNFT}
               disabled={buttonCreateNFTIsDisabled}
             >
@@ -542,6 +570,17 @@ function Campaign() {
                 campaign <a href='/profile'>here </a>
               </div>
             </div>
+          </Modal>
+          <Modal
+            open={selectTweetModal}
+            center
+            onClose={() => setSelectTweetModal(false)}
+            onOverlayClick={() => setSelectTweetModal(false)}
+          >
+            <TweetsCards
+              tweets={myTweets.tweets}
+              onTweetCardClick={onTweetCardClick}
+            />
           </Modal>
         </div>
       </div>

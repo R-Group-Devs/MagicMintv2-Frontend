@@ -102,7 +102,7 @@ function ClaimPage() {
         </div>
         <div className='row'>
           <div className='container row claims-container'>
-            {claimsNFT ? (
+            {claimsNFT && claimsNFT.length !== 0 ? (
               <div className='row'>{claimsNFT}</div>
             ) : (
               <div className='no-claims-message'>

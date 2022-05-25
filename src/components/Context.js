@@ -2,6 +2,14 @@ import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 export const myContext = createContext(null);
 
+const normalizeUser = (user) => ({
+  createdNFT: user.createdNFT,
+  profileCreated: user.profileCreated,
+  twitterId: user.twitterProvider.id,
+  twitterPhoto: user.twitterProvider.photo,
+  username:  user.twitterProvider.username,
+});
+
 export default function Context(props) {
   const [userObject, setUserObject] = useState();
 
@@ -9,10 +17,8 @@ export default function Context(props) {
     axios
       .get(`/getuser`)
       .then((res) => {
-        console.log('axios object', res);
         if (res.data) {
-          console.log('response data', res.data.user);
-          setUserObject(res.data.user);
+          setUserObject(normalizeUser(res.data.user));
         }
       })
       .catch((err) => console.log({ err }));

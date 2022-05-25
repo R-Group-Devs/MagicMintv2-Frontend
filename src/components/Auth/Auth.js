@@ -32,9 +32,7 @@ function Auth() {
   const logout = () => {
     window.location.href = process.env.REACT_APP_LOGOUT;
   };
-  const callback = () => {
-    window.location.href = process.REACT_APP_CALLBACK_TWITTER;
-  };
+  
   if (userObject) {
     navigate('/welcome');
   }
