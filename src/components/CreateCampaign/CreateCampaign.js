@@ -53,7 +53,7 @@ function Campaign() {
   const [numberOfNFTs, setNumberOfNFTs] = useState('');
   const [collection, setCollection] = useState('');
   const [countOldReshares, setCountOldReshares] = useState(true);
-  const [countOldLikes, setCountOldLikes] = useState(false);
+  const [countOldLikes, setCountOldLikes] = useState(true);
   const [campaignBase, setCampaignBase] = useState('likes');
   const [campaignNFTID, setCampaignNftID] = useState('');
   const [endDate, setEndDate] = useState(
