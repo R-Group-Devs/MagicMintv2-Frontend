@@ -30,7 +30,7 @@
 }
 .cc-button-div{
     text-align: center;
-    margin-top: 5%;
+    margin-top: 8%;
 }
 .create-nft-modal{
     width: 600px;
@@ -197,4 +197,16 @@ input[type=number] {
 .createNft-button:hover{
     cursor: pointer;
     transform: translateX(-50%) scale(1.05) !important;
+}
+
+.react-datetime-picker__wrapper {
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-left: 15px;
+}
+
+.end-date {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
 }

@@ -18,7 +18,7 @@ export default function Profile() {
     if (!userObject) return;
     //get all campaigns the user has
     const claimedNFTS = await axios.get(
-      `/api/claim/getClaimedNFTs/${userObject.username}`
+      `/api/claim/getClaimedNFTs`
     );
 
     console.log('claimed', claimedNFTS.data);
@@ -49,7 +49,7 @@ export default function Profile() {
 
     // /campaign/all/:handle
     const campaigns = await axios.get(
-      `/api/campaign/all/${userObject.username}`
+      '/api/campaign/myCampaigns'
     );
     console.log(campaigns.data);
     setAllCampaigns(campaigns);
@@ -108,7 +108,7 @@ export default function Profile() {
               </div>
               <div className='col-md-9 col-lg-9'></div>
               <div className='profile-section-image col-md-1 col-lg-1'>
-                <img src={userObject.twitterPhoto} className='profile' />
+                <img src={userObject.twitterProvider.photo} className='profile' />
               </div>
             </div>
             <div className='active-listings'>

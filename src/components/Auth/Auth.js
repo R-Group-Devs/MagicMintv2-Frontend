@@ -26,8 +26,6 @@ function Auth() {
   }
   const login = () => {
     window.location.href = process.env.REACT_APP_AUTH_TWITTER;
-
-    //   axios.get(process.env.REACT_APP_AUTH_TWITTER, {withCredentials:true})  i
   };
   const logout = () => {
     window.location.href = process.env.REACT_APP_LOGOUT;

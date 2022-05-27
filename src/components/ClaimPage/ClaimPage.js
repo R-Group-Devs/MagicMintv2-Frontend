@@ -32,7 +32,7 @@ function ClaimPage() {
 
   const checkClaims = async function () {
     const allCampaignsTwitterPost = await axios.get(
-      `/api/claim/getAllClaimsByUser/${userObject.username}`
+      `/api/claim/getAllClaimsByUser`
     );
     if (allCampaignsTwitterPost.data == 'none') {
       console.log(allCampaignsTwitterPost);
@@ -54,7 +54,7 @@ function ClaimPage() {
   useEffect(async () => {
     if (!userObject) return;
     const allClaims = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/claim/getClaims/${userObject.username}`
+      '/api/claim/getClaims'
     );
     setClaimsNFT(null);
     console.log('claimsdata', allClaims.data);
@@ -87,8 +87,8 @@ function ClaimPage() {
     return (
       <div>
         <Header
-          image={userObject.twitterPhoto}
-          username={userObject.username}
+          image={userObject.twitterProvider.photo}
+          username={userObject.twitterProvider.username}
         />
 
         <div className='row button-row'>

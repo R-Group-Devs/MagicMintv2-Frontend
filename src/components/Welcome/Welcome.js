@@ -12,8 +12,8 @@ export default function Welcome() {
     return (
       <div className=''>
         <Header
-          image={userObject.twitterPhoto}
-          username={userObject.username}
+          image={userObject.twitterProvider.photo}
+          username={userObject.twitterProvider.username}
         />
 
         <div className='row welcome-wrapper'>
@@ -35,7 +35,7 @@ export default function Welcome() {
                 className='claim-button'
                 onClick={() => navigate('/claim')}
               >
-                  Claim your nft
+                Claim your nft
               </button>
             </div>
           </div>

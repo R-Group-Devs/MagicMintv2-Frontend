@@ -58,7 +58,7 @@ function Campaign() {
   const [endDate, setEndDate] = useState(
     new Date(new Date().setHours(new Date().getHours() + 1))
   );
-  const [campaignFormError, setCampaignFormError] = useState(false);
+  const [campaignFormError, setCampaignFormError] = useState('');
   const [buttonCreateCampaignIsDisabled, setButtonCreateCampaignIsDisabled] =
     useState('true');
   const [buttonCreateNFTIsDisabled, setButtonCreateNFTIsDisabled] =
@@ -160,7 +160,7 @@ function Campaign() {
       setUserNFTPrototype((prevState) => [...prevState, res.data]);
     }).catch((err) => console.log(err))
   };
-  console.log(endDate);
+
   const createCamapignSubmit = async (e) => {
     e.preventDefault();
 
@@ -176,10 +176,11 @@ function Campaign() {
       endDate: endDate,
     };
 
-    if (campaignFormIsValid) {
-      console.log(content);
-    } else {
+    if (!campaignFormIsValid) {
       setCampaignFormError('Fill in the correct fields');
+      return;
+    } else {
+      setCampaignFormError('');
     }
     const response = await axios.post(`/api/campaign/create`, content);
     if (response.status == 200) {
@@ -207,8 +208,8 @@ function Campaign() {
     return (
       <div>
         <Header
-          image={userObject.twitterPhoto}
-          username={userObject.username}
+          image={userObject.twitterProvider.photo}
+          username={userObject.twitterProvider.username}
         />
         <div className='wrapper'>
           <div className='cc-title'>Create a campaign</div>
@@ -221,7 +222,7 @@ function Campaign() {
                   className='form-control'
                   id='twitterHandle'
                   aria-describedby='twitterHandleDesc'
-                  value={userObject.username}
+                  value={userObject.twitterProvider.username}
                   disabled
                 />
               </div>
@@ -341,9 +342,7 @@ function Campaign() {
                       setCollectionAddress(e.target.value);
                     }}
                   >
-                    <option value=''>
-                      None
-                    </option>
+                    <option value=''>None</option>
                     {graphCollection.map((collection) => (
                       <option
                         key={collection.address}
@@ -446,7 +445,7 @@ function Campaign() {
                 </div>
               )}
 
-              <div className='form-group'>
+              <div className='form-group end-date'>
                 <label>Campaign Ends on</label>
                 <br></br>
                 <DateTimePicker value={endDate} onChange={setEndDate} />
