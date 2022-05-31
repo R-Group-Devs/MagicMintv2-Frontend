@@ -1,14 +1,18 @@
-import react from "react";
+import react, { useContext } from "react";
 import "./Nav.css";
-import { Link , Redirect }  from 'react-router-dom';
+import { Link , Redirect, useNavigate }  from 'react-router-dom';
 import { useCallback, useEffect, useState } from "react";
 import speshiepp from '../../assets/images/speshiepp.png'
 import { Navbar, Container, Nav, NavDropdown} from "react-bootstrap"
 import { ethers } from "ethers";
 import { BigNumber, BigNumberish } from 'ethers';
+import { ReactComponent as LogoutIcon } from '../../assets/icons/logout.svg';
+
 
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import axios from "axios";
+import { myContext } from "../Context";
 
 
 function Header(props){
@@ -17,7 +21,9 @@ function Header(props){
   const [walletConnected, setWalletConnected] =  useState(false)
   const [activeAddress, setActiveAddress] = useState(null)
   const activeAddressLocal = localStorage.getItem('activeAddressLocal')
-  const provider = localStorage.getItem('provider')
+  const provider = localStorage.getItem('provider');
+  const navigate = useNavigate();
+  const {setUser} = useContext(myContext);
 
   console.log(activeAddressLocal)
   const [successFormModal, setSuccessFormModal] = useState(false);
@@ -49,6 +55,16 @@ function Header(props){
         setWalletError(true)
       }
   }
+  
+  const logout = () => {
+    axios
+      .post('/auth/logout')
+      .then(() => {
+          setUser(null);
+          navigate('/auth');
+      })
+      .catch((err) => console.log(err));
+  }
 
   useEffect(()=>{
     if(window.ethereum){
@@ -77,80 +93,104 @@ function Header(props){
     marginRight: "10px"
   }
   
-    return(
-        <div>
-            <nav className="navbar navbar-expand-md navbar-light"  style={{margin:"0% 2% 1% 2%"}}>
-                <a className="navbar-brand " href="#">
-                  <Link className="nav-link" to="/welcome">
-                      <span className="left-content branding">
-                        MagicMint
-                      </span>
-                  </Link>
+    return (
+      <div>
+        <nav
+          className='navbar navbar-expand-md navbar-light'
+          style={{ margin: '0% 2% 1% 2%' }}
+        >
+          <a className='navbar-brand ' href='#'>
+            <Link className='nav-link' to='/welcome'>
+              <span className='left-content branding'>MagicMint</span>
+            </Link>
+          </a>
+
+          <button
+            className='navbar-toggler'
+            type='button'
+            data-toggle='collapse'
+            data-target='#navbarsExample04'
+            aria-controls='navbarsExample04'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+          >
+            <span className='navbar-toggler-icon'></span>
+          </button>
+
+          <div className='collapse navbar-collapse' id='navbarsExample04'>
+            <ul className='navbar-nav mr-auto'>
+              <li className='nav-item'>
+                <Link className='nav-link' to='/createcampaign'>
+                  <span>Campaign </span>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link className='nav-link' to='/claim'>
+                  <span>Claim</span>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <a
+                  className='nav-link'
+                  href='https://playgrounds.wtf/'
+                  target={'_blank'}
+                >
+                  <span>Playgrounds</span>
                 </a>
-
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                  <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div className="collapse navbar-collapse" id="navbarsExample04">
-                  <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/createcampaign">
-                          <span >Campaign </span>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/claim">
-                        <span>Claim</span>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                    <a className="nav-link" href="https://playgrounds.wtf/" target={"_blank"}>
-                      <span>Playgrounds</span>
-                    </a>
-                    </li>
-
-                  </ul>
-                  <ul className="navbar-nav ml-auto" style={{marginRight: "0", marginLeft: "auto"}}>
-                    <li className="nav-item greetings">
-                      {/* <span className="nav-item  ">
+              </li>
+            </ul>
+            <ul
+              className='navbar-nav ml-auto right-nav'
+              style={{ marginRight: '0', marginLeft: 'auto' }}
+            >
+              <li className='nav-item greetings'>
+                {/* <span className="nav-item  ">
                             {props.username}  
                       </span> */}
 
-                      {activeAddressLocal
-                      ? <button className="connect-button" onClick={connectWalletEvent}>
-                          {truncateHex(activeAddressLocal).replace('0x', '')}
-                         </button>
-                      :  <button className="connect-button" onClick={connectWalletEvent}>
-                        Connect
-                      </button>
-                      }
-          
-                    </li>
-                    <li>
-                      <Link to="/profile" className="text-link">
-                        <img src={props.image} className="profile"/>
-                      </Link>
-                    </li>
-                  </ul>
+                {activeAddressLocal ? (
+                  <button
+                    className='connect-button'
+                    onClick={connectWalletEvent}
+                  >
+                    {truncateHex(activeAddressLocal).replace('0x', '')}
+                  </button>
+                ) : (
+                  <button
+                    className='connect-button'
+                    onClick={connectWalletEvent}
+                  >
+                    Connect
+                  </button>
+                )}
+              </li>
+              <li>
+                <Link to='/profile' className='text-link'>
+                  <img src={props.image} className='profile' />
+                </Link>
+              </li>
+              <li>
+                <button className="logout-btn" onClick={logout}><LogoutIcon /></button>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-                </div>
-           </nav>
-
-
-
-           <Modal open={successFormModal} onClose={onCloseSuccessCampaignModal} center>
-              <div>
-                    Unable to find Blockchain provider
-                  <div>
-                      To use the App please and claim NFT please install Metamask <a href="/https://metamask.io/download/">here </a>
-                  </div>
-
-              </div>
-            </Modal>
-            
-        </div>
-    )
+        <Modal
+          open={successFormModal}
+          onClose={onCloseSuccessCampaignModal}
+          center
+        >
+          <div>
+            Unable to find Blockchain provider
+            <div>
+              To use the App please and claim NFT please install Metamask{' '}
+              <a href='/https://metamask.io/download/'>here </a>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    );
 }
 
 

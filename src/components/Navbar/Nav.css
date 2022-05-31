@@ -97,20 +97,29 @@
 .connect-button{
     border: 1px solid #39603D;
     font-family: Grtsk Zetta;
-    margin-left: 10px;
     color: black;
-    margin-right: 20px;
     text-transform: uppercase;
     padding: 8px;
     background-color: white;
 }
 .connect-button:hover{
-    border: 1px solid #39603D;
-    font-family: Grtsk Zetta;
-    margin-left: 10px;
     color: #39603D;
-    margin-right: 20px;
-    text-transform: uppercase;
-    padding: 8px;
-    background-color: white;
+}
+
+.right-nav {
+    display: flex;
+    align-items: center;
+}
+
+.right-nav li {
+    height: fit-content;
+    margin: 0 10px;
+}
+
+.logout-btn {
+    width: fit-content;
+    height: fit-content;
+    background: transparent;
+    border: 0;
+    padding: 0;
 }

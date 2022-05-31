@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ClaimableNFT(props) {
-  console.log(props._id);
-
   const ipfsLink = `https://ipfs.io/ipfs/${props.ipfsUri}`;
   const MMEngine = props.engine;
   const [signerAddress, setSignerAddress] = useState('');
@@ -45,9 +43,9 @@ export default function ClaimableNFT(props) {
         </div>
         <div className='card-body'>
           <div className='title-earning'>
-            <Link to='/singlenft' className='text-link'>
+            {/* <Link to='/singlenft' className='text-link'> */}
               {props.name}
-            </Link>
+            {/* </Link> */}
           </div>
           <div className='button-claim-area'>
             <button className='button-claim' onClick={claimNFT}>

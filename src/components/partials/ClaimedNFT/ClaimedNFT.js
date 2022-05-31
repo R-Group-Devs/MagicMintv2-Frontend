@@ -17,9 +17,9 @@ export default function ClaimedNFT(props){
                     </div>
                     <div className="card-body">
                             <div className="title-earning">
-                                <Link to="/singlenft"className="text-link">
+                                {/* <Link to="/singlenft"className="text-link"> */}
                                         {props.name}
-                                </Link>
+                                {/* </Link> */}
  
                             </div>
 

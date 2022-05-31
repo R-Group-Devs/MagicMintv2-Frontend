@@ -34,7 +34,7 @@ const query = `
 }`;
 
 function Campaign() {
-  const userObject = useContext(myContext);
+  const {user} = useContext(myContext);
   const navigate = useNavigate();
   function addHours(date, hours) {
     const newDate = new Date(date);
@@ -98,10 +98,10 @@ function Campaign() {
 
   //getting created NFTS
   useEffect(async () => {
-    if (!userObject) return;
+    if (!user) return;
     const prototypess = await axios.get(`/api/campaign/getNFTPrototype`);
     setUserNFTPrototype(prototypess?.data ?? []);
-  }, [userObject]);
+  }, [user]);
 
   const [myTweets, setMyTweets] = useState(
     {
@@ -204,12 +204,11 @@ function Campaign() {
     return URL.createObjectURL(NFTFile);
   }, [NFTFile]);
 
-  if (userObject) {
     return (
       <div>
         <Header
-          image={userObject.twitterProvider.photo}
-          username={userObject.twitterProvider.username}
+          image={user.twitterProvider.photo}
+          username={user.twitterProvider.username}
         />
         <div className='wrapper'>
           <div className='cc-title'>Create a campaign</div>
@@ -222,7 +221,7 @@ function Campaign() {
                   className='form-control'
                   id='twitterHandle'
                   aria-describedby='twitterHandleDesc'
-                  value={userObject.twitterProvider.username}
+                  value={user.twitterProvider.username}
                   disabled
                 />
               </div>
@@ -574,14 +573,6 @@ function Campaign() {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className='not-logged-in'>
-        You are not logged in correctly. Please head <a href='/auth'> here</a>{' '}
-        to login with Twitter and access the app!
-      </div>
-    );
-  }
 }
 
 export default Campaign;

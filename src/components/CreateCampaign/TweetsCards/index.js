@@ -5,7 +5,6 @@ const TweetsCards = ({ tweets, onTweetCardClick }) => {
   const [show, setShow] = useState(false);
   const objRef = useRef(null);
   useEffect(() => {
-    console.log({ objRef });
     window.twttr.widgets.load(objRef.current);
   }, [objRef]);
     
