@@ -6,70 +6,31 @@ import ClaimedNFT from '../partials/ClaimedNFT/ClaimedNFT';
 import Header from '../Navbar/Header';
 import axios from 'axios';
 import { myContext } from '../Context';
+import moment from 'moment';
 
 export default function Profile() {
-  const userObject = useContext(myContext);
+  const {user} = useContext(myContext);
 
-  const [allCampaigns, setAllCampaigns] = useState(null);
-  const [allCampaignsManage, setAllCampaignsManage] = useState(null);
-  const [claimed, setClaimed] = useState();
+  const [allCampaigns, setAllCampaigns] = useState([]);
+  const [claimedNFTS, setClaimedNFTs] = useState([]);
 
   useEffect(async () => {
-    if (!userObject) return;
+    if (!user) return;
     //get all campaigns the user has
-    const claimedNFTS = await axios.get(
-      `/api/claim/getClaimedNFTs/${userObject.username}`
+    const claimsData = await axios.get(
+      `/api/claim/getClaimedNFTs`
     );
 
-    console.log('claimed', claimedNFTS.data);
+    setClaimedNFTs(claimsData.data);
+  }, [user]);
 
-    const claimsData = claimedNFTS.data.map((claim) => (
-      <div className='col-md-3 col-lg-3' key={claim._id}>
-        {/* //campaign name
-                //nft name
-                //ipfsUri */}
-
-        {/* 
-                when opening for details
-                //campaign name
-                //campaign creator
-                //nft name
-                //nft desc
-                //nft number = campaign mint number */}
-
-        <ClaimedNFT
-          ipfsUri={claim.ipfsUri}
-          name={claim.name}
-          _id={claim._id}
-        ></ClaimedNFT>
-      </div>
-    ));
-
-    setClaimed(claimsData);
-
+  useEffect(async () => {
     // /campaign/all/:handle
-    const campaigns = await axios.get(
-      `/api/campaign/all/${userObject.username}`
-    );
-    console.log(campaigns.data);
-    setAllCampaigns(campaigns);
+    if (!user) return;
+    const campaigns = await axios.get('/api/campaign/myCampaigns');
+    setAllCampaigns(campaigns.data);
+  }, [user]);
 
-    let campaignManage = campaigns.data.map((campaign) => (
-      <div key={campaign._id}>
-        <div className='row patronage-table-row'>
-          <div className='col-lg-2 col-md-2'>{campaign.campaignName}</div>
-          <div className='col-lg-2 col-md-2'>01/02/2022</div>
-          <div className='col-lg-2 col-md-2'>01/03/2022</div>
-          <div className='col-lg-2 col-md-2'>100</div>
-          <div className='col-lg-2 col-md-2'>50</div>
-        </div>
-      </div>
-    ));
-    setAllCampaignsManage(campaignManage);
-    console.log(allCampaignsManage);
-  }, [userObject]);
-
-  if (userObject) {
     return (
       <div className='row'>
         <div className='col-md-3 col-lg-3 left-profile'>
@@ -78,25 +39,25 @@ export default function Profile() {
           </Link>
           <div className='profile-nav'>
             <div>
-              <a href='/profile'>My profile</a>
+              <Link to='/profile'>My profile</Link>
             </div>
             <div>
-              <a href='/profile'>Claimable NFTs</a>
+              <Link to='/claim'>Claimable NFTs</Link>
             </div>
             <div>
-              <a
-                href='/profile
+              <Link
+                to='/profile
                         '
               >
                 My campaigns
-              </a>
+              </Link>
             </div>
             <div>
-              <a href='/createcampaign'>Create campaign</a>
+              <Link to='/createcampaign'>Create campaign</Link>
             </div>
             {/* <div><button className="button-logout">Logout</button></div> */}
             <div>
-              <a href='/welcome'>← Back to start</a>
+              <Link to='/'>← Back to start</Link>
             </div>
           </div>
         </div>
@@ -108,13 +69,13 @@ export default function Profile() {
               </div>
               <div className='col-md-9 col-lg-9'></div>
               <div className='profile-section-image col-md-1 col-lg-1'>
-                <img src={userObject.twitterPhoto} className='profile' />
+                <img src={user.twitterProvider.photo} className='profile' />
               </div>
             </div>
             <div className='active-listings'>
               <div className='profile-section-title'>Claimable NFTs</div>
               <div className='profile-section-desc'>
-                Get your reward! - <a href='/claim'>Claim</a>
+                Get your reward! - <Link to='/claim'>Claim</Link>
               </div>
             </div>
 
@@ -122,34 +83,63 @@ export default function Profile() {
               <div className='profile-section-title'>Claimed NFTs</div>
               <div className='profile-section-desc'></div>
 
-              <div className='row'>{claimed}</div>
-              <div className='see-more-subscribers'>See More ..</div>
+              <div className='row'>
+                {claimedNFTS.length !== 0 ? 
+                  claimedNFTS.map((claim) => (
+                  <div className='col-md-3 col-lg-3' key={claim._id}>
+                    <ClaimedNFT
+                      ipfsUri={claim.ipfsUri}
+                      name={claim.originNFT.name}
+                      _id={claim._id}
+                    ></ClaimedNFT>
+                  </div>
+                ))
+                :
+                <h6 style={{
+                  textAlign: 'center'
+                }}>You haven't claimed any NFT</h6>
+              }
+              </div>
             </div>
           </div>
 
           <div className='patronage-nfts'>
             <div className='profile-section-title'>My campaigns</div>
-            <div className='row patronage-table-nav'>
+            <div className='row patronage-table-nav mb-1'>
               <div className='col-lg-2 col-md-2'>Name</div>
-              <div className='col-lg-2 col-md-2'>Start Date</div>
-              <div className='col-lg-2 col-md-2'>End Date</div>
+              <div className='col-lg-3 col-md-3'>Start Date</div>
+              <div className='col-lg-3 col-md-3'>End Date</div>
               <div className='col-lg-2 col-md-2'>Likes</div>
               <div className='col-lg-2 col-md-2'>Reshares</div>
             </div>
 
-            {allCampaignsManage}
-
-            <div className='see-more-subscribers'>See More ..</div>
+            {allCampaigns.map((campaign) => (
+              <div key={campaign._id} className='mb-2'>
+                <div className='row patronage-table-row'>
+                  <div className='col-lg-2 col-md-2'>
+                    {campaign.campaignName}
+                  </div>
+                  <div className='col-lg-3 col-md-3'>
+                    {
+                      moment(campaign.startDate).format('DD/MM/yyyy - HH:mm')
+                    }
+                  </div>
+                  <div className='col-lg-3 col-md-3'>{moment(campaign.endDate).format('DD/MM/yyyy - HH:mm')}</div>
+                  <div className='col-lg-2 col-md-2'>
+                    {campaign.campaignBase === 'likes'
+                      ? campaign.likes.length
+                      : '--||--'}
+                  </div>
+                  <div className='col-lg-2 col-md-2'>
+                    {campaign.campaignBase === 'reshares'
+                      ? campaign.reshares.length
+                      : '--||--'}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className='not-logged-in'>
-        You are not logged in correctly. Please head <a href='/auth'> here</a>{' '}
-        to login with Twitter and access the app!
-      </div>
-    );
-  }
 }

@@ -24,14 +24,14 @@
     border-radius: 20px;
 }
 .campaign-button:hover{
-    font-family: Whyte;
+    /* font-family: Whyte;
     width: 430px;
     height: 80px;
     color: white;
     margin-top:7%;
-    border: none;
+    border: none; */
     background: #DADED4;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 .claim-button{
     font-family: Whyte;

@@ -126,7 +126,7 @@
     text-transform: uppercase;
     color: #B2B2C1;
 }
-.patronage-table-row{
+.patronage-table-row {
     background: #F7F7FC;
     font-family: Whyte;
     font-style: normal;
@@ -141,6 +141,10 @@
     margin-top: 1px;
     margin-left: -13px!important;
 }
+.patronage-table-row:hover {
+    background: #dedee2;
+}
+
 .button-logout{
     border:none;
     font-family: Grtsk-Zetta;
@@ -329,7 +333,6 @@
 
 
 .right-profile{
-    height: 1500px;
     margin-left: 28%;
     margin-top: 30px;
 }
@@ -420,4 +423,8 @@
 }
 .nav-link{
     color: black!important;
+}
+
+.patronage-table-row > div, .patronage-table-nav > div {
+    text-align: center;
 }

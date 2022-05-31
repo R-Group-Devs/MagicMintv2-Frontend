@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import './Welcome.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Navbar/Header';
 import { myContext } from '../Context';
 import { useContext } from 'react';
 
 export default function Welcome() {
-  const userObject = useContext(myContext);
-  console.log(userObject);
-  if (userObject) {
+  const {user} = useContext(myContext);
+  const navigate = useNavigate();
+
     return (
       <div className=''>
         <Header
-          image={userObject.twitterPhoto}
-          username={userObject.username}
+          image={user.twitterProvider.photo}
+          username={user.twitterProvider.username}
         />
 
         <div className='row welcome-wrapper'>
@@ -21,22 +21,21 @@ export default function Welcome() {
           <div className='col-md-4 col-lg-4 col-sm-12 '>
             <div className='welcomebuttons'>
               <div className='welcome-title'>
-                Greetings, {userObject?.username} 👋{' '}
+                Greetings, {user.twitterProvider.username} 👋{' '}
               </div>
               <div className='welcome-desc'></div>
-              <button className='campaign-button'>
-                <Link className='text-link' to='/createcampaign'>
-                  {' '}
-                  Create a campaign
-                </Link>
+              <button
+                className='campaign-button'
+                onClick={() => navigate('/createcampaign')}
+              >
+                Create a campaign
               </button>
               <br></br>
-              <button className='claim-button' disabled>
-                {' '}
-                <Link className='text-link' to='/claim'>
-                  {' '}
-                  Claim your nft
-                </Link>{' '}
+              <button
+                className='claim-button'
+                onClick={() => navigate('/claim')}
+              >
+                Claim your nft
               </button>
             </div>
           </div>
@@ -44,12 +43,4 @@ export default function Welcome() {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className='not-logged-in'>
-        You are not logged in correctly. Please head <a href='/auth'> here</a>{' '}
-        to login with Twitter and access the app!
-      </div>
-    );
-  }
 }
