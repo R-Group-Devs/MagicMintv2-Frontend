@@ -6,25 +6,36 @@ export default function Context(props) {
   const [user, setUser] = useState(null);
   const [isUserLoading, setUserLoading] = useState({
     timeout: true,
-    fetch: true
+    fetch: true,
   });
 
   useEffect(() => {
     axios
-      .get(`/getuser`)
+      .get(`/getMe`)
       .then((res) => {
         if (res.data) {
-          setUser(res.data.user);
+          setUser(res.data);
         }
       })
       .catch((err) => console.log({ err }))
-      .finally(() => setUserLoading((prevState) => ({...prevState, fetch: false})));
-      const userLoadingTimeout = setTimeout(() => setUserLoading((prevState) => ({...prevState, timeout: false})), [1200]);
-      return () => clearTimeout(userLoadingTimeout);
+      .finally(() =>
+        setUserLoading((prevState) => ({ ...prevState, fetch: false }))
+      );
+    const userLoadingTimeout = setTimeout(
+      () => setUserLoading((prevState) => ({ ...prevState, timeout: false })),
+      [1200]
+    );
+    return () => clearTimeout(userLoadingTimeout);
   }, []);
 
   return (
-    <myContext.Provider value={{ user, setUser,isUserLoading: isUserLoading.timeout || isUserLoading.fetch }}>
+    <myContext.Provider
+      value={{
+        user,
+        setUser,
+        isUserLoading: isUserLoading.timeout || isUserLoading.fetch,
+      }}
+    >
       {props.children}
     </myContext.Provider>
   );
