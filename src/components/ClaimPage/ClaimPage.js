@@ -1,4 +1,4 @@
-import react, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import './ClaimPage.css';
 import Header from '../Navbar/Header';
@@ -7,25 +7,28 @@ import MMEngineABI from '../../shell/abis/MMEngine.json';
 import { Contract, ethers } from 'ethers';
 import { myContext } from '../Context';
 
+const MMEngineAddress = '0xBEA58ad6d477Ac598E68D8E6aC23E19F43288F06';
+
 function ClaimPage() {
   const { user } = useContext(myContext);
-
-  const MMEngineAddress = '0xBEA58ad6d477Ac598E68D8E6aC23E19F43288F06';
-
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-
-  const MMEngine = new ethers.Contract(
-    MMEngineAddress,
-    MMEngineABI.abi,
-    signer
-  );
-
-  useEffect(async () => {
-    const contractName = await MMEngine.name();
-  }, []);
-
+  const [MMEngine, setMMEngine] = useState(null);
+  const [signer, setSigner] = useState(null);
   const [claimsNFT, setClaimsNFT] = useState([]);
+
+  useEffect(() => {
+    if (!window.ethereum) return;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const _signer = provider.getSigner();
+
+    const _MMEngine = new ethers.Contract(
+      MMEngineAddress,
+      MMEngineABI.abi,
+      _signer
+    );
+
+    setMMEngine(_MMEngine);
+    setSigner(_signer);
+  }, [window.ethereum]);
 
   const checkClaims = async () => {
     const checkClaims = await axios.get(`/api/claim/getAllClaimsByUser`);

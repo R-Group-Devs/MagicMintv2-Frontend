@@ -5,18 +5,18 @@ import axios from 'axios';
 
 export default function ClaimableNFT(props) {
   const ipfsLink = `https://ipfs.io/ipfs/${props.ipfsUri}`;
-  const MMEngine = props.engine;
   const [signerAddress, setSignerAddress] = useState('');
 
   useEffect(async () => {
-    console.log('sssss', MMEngine.signer_address);
+    if (!props.signer) return;
     const signerAddr = await props.signer.getAddress();
     setSignerAddress(signerAddr);
-  }, []);
+  }, [props.signer]);
   // console.log(ipfsUri)
 
   let claimNFT = async function () {
-    console.log(props._id);
+    const MMEngine = props.engine;
+    if (!MMEngine) return;
 
     const claimMint = await MMEngine.mint(
       '0xdaef03a22c9be9db22eff61dca429f3e582c9c6d',
@@ -44,7 +44,7 @@ export default function ClaimableNFT(props) {
         <div className='card-body'>
           <div className='title-earning'>
             {/* <Link to='/singlenft' className='text-link'> */}
-              {props.name}
+            {props.name}
             {/* </Link> */}
           </div>
           <div className='button-claim-area'>
