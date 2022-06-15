@@ -10,7 +10,7 @@ import { Modal } from 'react-responsive-modal';
 import { useNavigate } from 'react-router-dom';
 
 function Auth() {
-  const userObject = useContext(myContext);
+  const {user} = useContext(myContext);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState();
@@ -26,18 +26,14 @@ function Auth() {
   }
   const login = () => {
     window.location.href = process.env.REACT_APP_AUTH_TWITTER;
+  };
+  
+  useEffect(() => {
+    if(user) {
+      navigate('/');
+    }
+  }, [user]);
 
-    //   axios.get(process.env.REACT_APP_AUTH_TWITTER, {withCredentials:true})  i
-  };
-  const logout = () => {
-    window.location.href = process.env.REACT_APP_LOGOUT;
-  };
-  const callback = () => {
-    window.location.href = process.REACT_APP_CALLBACK_TWITTER;
-  };
-  if (userObject) {
-    navigate('/welcome');
-  }
   return (
     <div>
       <div className='centeredBox'>
